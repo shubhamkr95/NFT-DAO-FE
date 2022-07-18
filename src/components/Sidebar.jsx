@@ -15,26 +15,24 @@ export const Sidebar = () => {
   
   <ul className="space-y-2">
  <li>
-    <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-      
-       <span className="ml-3">Proposal</span>
-    </a>
+ <NavLink  to='/' className="flex items-center ml-3 p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" >
+       {" "}
+        Proposal</NavLink> 
  </li>
  <li>
-    <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-       
-       <span className="flex-1 ml-3 whitespace-nowrap">New Proposal</span>
-       
-    </a>
+ <NavLink  to='/Create' className="flex items-center ml-3 p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" >
+       {" "}
+       New Proposal</NavLink> 
  </li>
  <li>
-    <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-       
-       <span className="flex-1 ml-3 whitespace-nowrap">Treasury</span>
-    </a>
+ <NavLink  to='/Treasury' className="flex items-center ml-3 p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" >
+       {" "}
+       Treasury</NavLink> 
  </li>
  <li>
-   <NavLink  to='/About' className="flex items-center ml-3 p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" > About</NavLink> 
+   <NavLink  to='/About' className="flex items-center ml-3 p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" >
+       {" "}
+       About</NavLink> 
  </li>
 
  

@@ -8,7 +8,7 @@ import Createpage from './pages/Createpage';
 import Treasurypage from './pages/Treasurypage';
 import Aboutpage from './pages/Aboutpage';
 import Detailspage from './pages/Detailspage';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route,Routes } from 'react-router-dom';
 
 
 
@@ -17,13 +17,13 @@ export default function App() {
   
   <div>
     
-   
-    <Route exact path="/" component={Home} />
-    <Route  path ="/Create" component={Createpage}/>
-    <Route   path="/Treasury" component={Treasurypage}/>
-    <Route  path="/About" component={Aboutpage}/>
-    <Route path="/Details" component={Detailspage}/>
-   
+  <Routes>
+    <Route exact path="/" element={<Home/>} />
+    <Route  path ="/Create" element={<Createpage/>}/>
+    <Route  path="/Treasury" element={<Treasurypage/>}/>
+    <Route  path="/About" element={<Aboutpage/>}/>
+    <Route path="/Details" element={<Detailspage/>}/>
+  </Routes>
     
 
    
