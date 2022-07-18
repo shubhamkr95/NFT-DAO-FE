@@ -9,7 +9,7 @@ const Heading = () => {
     <div className='mx-auto mt-2 block p-6 m-2 max-w-2xl rounded-lg border shadow-md hover:bg-gray-100' style={{borderColor:"#2d2d2d"}}>
         
     
-    <p className="font-normal text-gray-700 dark:text-gray-400 text-center">A decentralized community helping the world go bankless</p>
+    <p className="font-normal text-gray-400 text-center">A decentralized community helping the world go bankless</p>
   
     
       </div>
