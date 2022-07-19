@@ -17,35 +17,35 @@ import { publicProvider } from "wagmi/providers/public";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export default function App() {
-	const { chains, provider } = configureChains(
-		[chain.polygonMumbai, chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum, chain.ropsten, chain.rinkeby],
-		[alchemyProvider({ alchemyId: process.env.ALCHEMY_ID }), publicProvider()]
-	);
+ const { chains, provider } = configureChains(
+  [chain.polygonMumbai, chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum, chain.ropsten, chain.rinkeby],
+  [alchemyProvider({ alchemyId: process.env.ALCHEMY_ID }), publicProvider()]
+ );
 
-	const { connectors } = getDefaultWallets({
-		appName: "My RainbowKit App",
-		chains,
-	});
+ const { connectors } = getDefaultWallets({
+  appName: "My RainbowKit App",
+  chains,
+ });
 
-	const wagmiClient = createClient({
-		autoConnect: true,
-		connectors,
-		provider,
-	});
+ const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+ });
 
-	return (
-		<WagmiConfig client={wagmiClient}>
-			<RainbowKitProvider chains={chains}>
-				<div>
-					<Routes>
-						<Route exact path="/" element={<Home />} />
-						<Route path="/Create" element={<Createpage />} />
-						<Route path="/Treasury" element={<Treasurypage />} />
-						<Route path="/About" element={<Aboutpage />} />
-						<Route path="/Details" element={<Detailspage />} />
-					</Routes>
-				</div>
-			</RainbowKitProvider>
-		</WagmiConfig>
-	);
+ return (
+  <WagmiConfig client={wagmiClient}>
+   <RainbowKitProvider chains={chains}>
+    <div>
+     <Routes>
+      <Route exact path="/" element={<Home />} />
+      <Route path="/Create" element={<Createpage />} />
+      <Route path="/Treasury" element={<Treasurypage />} />
+      <Route path="/About" element={<Aboutpage />} />
+      <Route path="/Details" element={<Detailspage />} />
+     </Routes>
+    </div>
+   </RainbowKitProvider>
+  </WagmiConfig>
+ );
 }
