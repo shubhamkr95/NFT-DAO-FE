@@ -25,14 +25,22 @@ const Treasury = () => {
  };
 
  const handleSubmit = async (e) => {
-  e.preventDefault();
-  const data = {
-   to: treasuryAddress,
-   value: ethers.utils.parseUnits(Matic, 18),
-  };
+  try {
+   e.preventDefault();
+   if (Matic < 1) {
+    alert("Please enter the minimum value");
+   } else {
+    const data = {
+     to: treasuryAddress,
+     value: ethers.utils.parseUnits(Matic, 18),
+    };
 
-  const txn = await signer.sendTransaction(data);
-  setTxnHash(txn.hash);
+    const txn = await signer.sendTransaction(data);
+    setTxnHash(txn.hash);
+   }
+  } catch (error) {
+   console.error(error.message);
+  }
  };
 
  return (
