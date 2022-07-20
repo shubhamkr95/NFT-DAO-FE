@@ -10,7 +10,7 @@ const Card = () => {
    >
     <div className="mb-3 flex flex-row justify-between">
      <div className="flex flex-row">
-      <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg" class=" h-6 w-6 rounded-full" alt="" />
+      <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg" className=" h-6 w-6 rounded-full" alt="" />
       <p className=" font-medium text-gray-400 ml-2">BanklessDao by icedcool.eth</p>
       <button className=" hover:bg-blue-700 text-gray-400 font-bold  px-1 rounded-full">Core</button>
      </div>

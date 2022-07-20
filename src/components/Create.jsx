@@ -11,7 +11,7 @@ export const Create = () => {
    </div>
    <div>
     <form>
-     <label for="email" className="block mt-10 mx-auto max-w-2xl text-sm font-normal text-gray-400 ">
+     <label htmlFor="email" className="block mt-10 mx-auto max-w-2xl text-sm font-normal text-gray-400 ">
       Title
      </label>
      <input
@@ -22,7 +22,7 @@ export const Create = () => {
       placeholder="Any Title"
      />
 
-     <label for="message" className=" mt-10 block  mb-2 text-sm font-medium text-gray-400 mx-auto max-w-2xl ">
+     <label htmlFor="message" className=" mt-10 block  mb-2 text-sm font-medium text-gray-400 mx-auto max-w-2xl ">
       Your message
      </label>
      <textarea
@@ -32,7 +32,7 @@ export const Create = () => {
       placeholder="Leave a comment..."
      ></textarea>
 
-     <label for="email" className="block mt-10 mx-auto max-w-2xl text-sm font-normal text-gray-400 ">
+     <label htmlFor="email" className="block mt-10 mx-auto max-w-2xl text-sm font-normal text-gray-400 ">
       Discussion(Optional)
      </label>
      <input

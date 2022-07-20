@@ -46,7 +46,7 @@ const Vote = () => {
       style={{ borderColor: "#2d2d2d" }}
      >
       <div className="flex flex-row">
-       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        0x35EA...14B7
       </div>
       <div>I’d stake Cake for Carbo pool</div>
@@ -57,7 +57,7 @@ const Vote = () => {
       style={{ borderColor: "#2d2d2d" }}
      >
       <div className="flex flex-row">
-       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        0x35EA...14B7
       </div>
       <div>I’d stake Cake for Carbo pool</div>
@@ -68,7 +68,7 @@ const Vote = () => {
       style={{ borderColor: "#2d2d2d" }}
      >
       <div className="flex flex-row">
-       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        0x35EA...14B7
       </div>
       <div>I’d stake Cake for Carbo pool</div>
@@ -79,7 +79,7 @@ const Vote = () => {
       style={{ borderColor: "#2d2d2d" }}
      >
       <div className="flex flex-row">
-       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        0x35EA...14B7
       </div>
       <div>I’d stake Cake for Carbo pool</div>
@@ -90,7 +90,7 @@ const Vote = () => {
       style={{ borderColor: "#2d2d2d" }}
      >
       <div className="flex flex-row">
-       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        0x35EA...14B7
       </div>
       <div>I’d stake Cake for Carbo pool</div>
@@ -101,7 +101,7 @@ const Vote = () => {
       style={{ borderColor: "#2d2d2d" }}
      >
       <div className="flex flex-row">
-       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        0x35EA...14B7
       </div>
       <div>I’d stake Cake for Carbo pool</div>

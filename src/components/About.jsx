@@ -38,7 +38,7 @@ const About = () => {
        className="flex flex-row py-2 px-4 w-full border-b border-gray-200 dark:border-gray-600"
        style={{ borderColor: "#2d2d2d" }}
       >
-       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        0x35EA...14B7
       </li>
      </ul>
@@ -52,27 +52,27 @@ const About = () => {
        Authors
       </li>
       <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        0x47f8...32a1
       </li>
       <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/042.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/042.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        abvavgjoe.eth
       </li>
       <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/043.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/043.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        redvan.eth
       </li>
       <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/044.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/044.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        grendel.eth
       </li>
       <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/045.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/045.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        frogmonkee.eth
       </li>
       <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/046.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src="https://mdbootstrap.com/img/new/standard/city/046.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
        icedcool.eth
       </li>
      </ul>
