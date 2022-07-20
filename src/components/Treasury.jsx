@@ -56,8 +56,8 @@ const Treasury = () => {
      <p>Treasury balance</p>
     </div>
     <p className=" text-3xl text-center">
-     <span className="font-extrabold text-gray-400">{AccountBalance}</span>
-     <span className="font-normal text-gray-400"> MATIC</span>
+     <span className="font-extrabold text-gray-50">{AccountBalance}</span>
+     <span className="font-normal text-gray-50"> MATIC</span>
     </p>
    </div>
 

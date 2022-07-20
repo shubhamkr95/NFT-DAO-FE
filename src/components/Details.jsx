@@ -1,6 +1,27 @@
+import { ethers } from "ethers";
 import React from "react";
+import { governanceContract, provider, governanceAbi } from "../utils/Connectors";
+import { useEffect } from "react";
 
 const Details = () => {
+ useEffect(() => {
+  async function receipt() {
+   const events = await provider.getTransactionReceipt(
+    "0xeae0c5becc6e12701670a9144099a81170516829233031fd310ef313a7d183a9"
+   );
+   const logs = events.logs[0].data;
+   // console.log(logs);
+
+   const data = ethers.utils.defaultAbiCoder.decode(
+    ["uint256", "address", "address", "uint256", "bytes32", "bytes32", "uint256", "uint256", "string"],
+    logs
+   );
+   console.log(data);
+  }
+
+  receipt();
+ }, []);
+
  return (
   <div>
    <div className="mx-auto max-w-2xl">
@@ -8,10 +29,10 @@ const Details = () => {
      <h1>Grants Commitee Election for S5 and S6</h1>
     </div>
     <div className="mt-5 flex flex-row">
-     <button class="bg-green-500 hover:bg-blue-700 text-white font-bold  px-1 rounded-full">Active</button>
+     <button className="bg-green-500 hover:bg-blue-700 text-white font-bold  px-1 rounded-full">Active</button>
      <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg" class=" h-6 w-6 ml-2 rounded-full" alt="" />
      <p className=" font-medium text-gray-400 ml-2">BanklessDao by icedcool.eth</p>
-     <button class=" hover:bg-blue-700 text-gray-400 font-bold  px-1 rounded-full">Core</button>
+     <button className=" hover:bg-blue-700 text-gray-400 font-bold  px-1 rounded-full">Core</button>
     </div>
     <div>
      <p className=" font-medium text-xl text-gray-400 mt-5">Title: Grants Committee Election for S5 and S6</p>
