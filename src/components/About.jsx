@@ -25,7 +25,7 @@ const About = () => {
     </div>
     <div>
      <ul
-      className="mx-auto max-w-xl mt-5 text-lg font-medium text-gray-900  rounded-lg border border-gray-600 text-white"
+      className="mx-auto max-w-xl mt-5 text-lg font-medium   rounded-lg border border-gray-600 text-white"
       style={{ borderColor: "#2d2d2d" }}
      >
       <li
@@ -45,7 +45,7 @@ const About = () => {
     </div>
     <div>
      <ul
-      className="mx-auto max-w-xl mt-5 mb-5 text-lg font-medium text-gray-900  rounded-lg border border-gray-200  border-gray-600 text-white"
+      className="mx-auto max-w-xl mt-5 mb-5 text-lg font-medium rounded-lg border   text-white"
       style={{ borderColor: "#2d2d2d" }}
      >
       <li className="py-3 px-4 w-full rounded-t-lg border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>

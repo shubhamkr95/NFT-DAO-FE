@@ -18,7 +18,7 @@ export const Sidebar = () => {
    <p className="font-normal text-gray-400 text-center">20k members</p>
    <a
     href="#"
-    className="inline-block flex m-4 flex-row justify-center text-sm px-4 py-2 leading-none border rounded-full text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 "
+    className=" flex m-4 flex-row justify-center text-sm px-4 py-2 leading-none border rounded-full text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 "
    >
     Join
    </a>

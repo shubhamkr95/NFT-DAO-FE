@@ -1,6 +1,32 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import { ethers } from "ethers";
+import { governanceContract, provider } from "../utils/Connectors";
 
 const Sidetabs = () => {
+ const [ProposalSnapshot, setProposalSnapshot] = useState(0);
+
+ useEffect(() => {
+  async function receipt() {
+   const events = await provider.getTransactionReceipt(
+    "0xeae0c5becc6e12701670a9144099a81170516829233031fd310ef313a7d183a9"
+   );
+   const logs = events.logs[0].data;
+
+   const data = ethers.utils.defaultAbiCoder.decode(
+    ["uint256", "address", "address[]", "uint256[]", "string[]", "bytes[]", "uint256", "uint256", "string"],
+    logs
+   );
+
+   const ID = data[0].toString();
+   const snapshot = await governanceContract.proposalSnapshot(ID);
+
+   setProposalSnapshot(snapshot.toString());
+  }
+
+  receipt();
+ }, []);
+
  return (
   <div>
    <div>
@@ -53,7 +79,7 @@ const Sidetabs = () => {
       style={{ borderColor: "#2d2d2d" }}
      >
       <div style={{ color: "#8b949e" }}>Snapshot</div>
-      <div className="text-white">15,128,294</div>
+      <div className="text-white">{ProposalSnapshot}</div>
      </li>
     </ul>
    </div>
