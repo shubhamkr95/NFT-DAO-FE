@@ -8,6 +8,7 @@ import Treasurypage from "./pages/Treasurypage";
 import Aboutpage from "./pages/Aboutpage";
 import Detailspage from "./pages/Detailspage";
 import { Route, Routes } from "react-router-dom";
+import Nftpage from "./pages/Nftpage";
 
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
@@ -16,7 +17,7 @@ import { publicProvider } from "wagmi/providers/public";
 
 export default function App() {
  const { chains, provider } = configureChains(
-  [chain.polygonMumbai, chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum, chain.ropsten, chain.rinkeby],
+  [chain.polygonMumbai, chain.mainnet, chain.polygon, chain.ropsten, chain.rinkeby],
   [alchemyProvider({ alchemyId: process.env.ALCHEMY_ID }), publicProvider()]
  );
 
@@ -41,6 +42,7 @@ export default function App() {
       <Route path="/Treasury" element={<Treasurypage />} />
       <Route path="/About" element={<Aboutpage />} />
       <Route path="/Details" element={<Detailspage />} />
+      <Route path="/Nft" element={<Nftpage />} />
      </Routes>
     </div>
    </RainbowKitProvider>

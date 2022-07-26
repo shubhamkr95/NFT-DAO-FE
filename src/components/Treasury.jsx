@@ -1,38 +1,44 @@
 import React from "react";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
-import { treasuryContract, signer, treasuryAddress } from "../utils/Connectors";
+import { treasuryContract, signer, treasuryAddress, provider } from "../utils/Connectors";
 
 const Treasury = () => {
  const [AccountBalance, setAccountBalance] = useState(0);
- const [Matic, setMatic] = useState(0);
+ const [Ether, setEther] = useState(0);
  const [TxnHash, setTxnHash] = useState("");
 
- useEffect(() => {
-  async function getBalance() {
+ const getBalance = async () => {
+  const chainId = await provider.getNetwork();
+  if (chainId.chainId !== 80001) {
+   return alert("Please select mumbai testnet");
+  } else {
    const balance = await treasuryContract.balance();
    const parseBalance = await ethers.utils.formatEther(balance);
    setAccountBalance(parseBalance);
   }
+ };
+
+ useEffect(() => {
   getBalance();
  }, []);
 
- const handleMatic = async (e) => {
+ const handleEther = async (e) => {
   if (typeof e.target.value === String) {
    e.preventDefault();
   }
-  setMatic(e.target.value);
+  setEther(e.target.value);
  };
 
  const handleSubmit = async (e) => {
   try {
    e.preventDefault();
-   if (Matic < 1) {
+   if (Ether < 1) {
     alert("Please enter the minimum value");
    } else {
     const data = {
      to: treasuryAddress,
-     value: ethers.utils.parseUnits(Matic, 18),
+     value: ethers.utils.parseUnits(Ether, 18),
     };
 
     const txn = await signer.sendTransaction(data);
@@ -49,7 +55,7 @@ const Treasury = () => {
     <h1>Treasury</h1>
    </div>
    <div
-    className="mx-auto mt-2 block p-6 m-2 max-w-2xl rounded-lg border shadow-md hover:bg-gray-100"
+    className="mx-auto mt-2 block p-6 m-2 max-w-2xl rounded-lg border shadow-md hover:bg-gray-400"
     style={{ borderColor: "#2d2d2d" }}
    >
     <div className="text-gray-500 text-xl text-center">
@@ -57,7 +63,7 @@ const Treasury = () => {
     </div>
     <p className=" text-3xl text-center">
      <span className="font-extrabold text-gray-50">{AccountBalance}</span>
-     <span className="font-normal text-gray-50"> MATIC</span>
+     <span className="font-normal text-gray-50"> Ether</span>
     </p>
    </div>
 
@@ -69,8 +75,8 @@ const Treasury = () => {
        className="bg-white border border-solid text-black text-center w-20 ml-2 rounded-lg drop-shadow-xl"
        type="number"
        min="0"
-       value={Matic}
-       onChange={handleMatic}
+       value={Ether}
+       onChange={handleEther}
       />
      </label>
      <div>

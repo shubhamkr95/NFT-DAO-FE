@@ -1,47 +1,102 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const Create = () => {
+ const navigate = useNavigate();
+ const [Address, setAddress] = useState("");
+ const [Ether, setEther] = useState(0);
+ const [Description, setDescription] = useState("");
+
+ const handleAddress = async (e) => {
+  try {
+   e.preventDefault();
+   setAddress(e.target.value);
+  } catch (error) {
+   console.error(error);
+  }
+ };
+
+ const handleEther = (e) => {
+  try {
+   e.preventDefault();
+   setEther(e.target.value);
+  } catch (error) {
+   console.error(error);
+  }
+ };
+
+ const handleDescription = (e) => {
+  try {
+   e.preventDefault();
+   setDescription(e.target.value);
+  } catch (error) {
+   console.error(error);
+  }
+ };
+
+ const handleSubmit = async (e) => {
+  try {
+   e.preventDefault();
+   navigate("/");
+  } catch (error) {
+   console.error(error);
+  }
+ };
+
  return (
   <>
    <div
-    className="mx-auto mt-5 block p-6 m-2 max-w-2xl rounded-lg border shadow-md hover:bg-gray-100"
+    className="mx-auto mt-5 block p-6 m-2 max-w-2xl rounded-lg border shadow-md "
     style={{ borderColor: "#2d2d2d" }}
    >
-    <p className="font-normal text-gray-400">You need to be an author of the space in order to submit a proposal.</p>
+    <p className=" font-bold text-2xl text-gray-100">Create proposal.</p>
    </div>
    <div>
-    <form>
-     <label htmlFor="email" className="block mt-10 mx-auto max-w-2xl text-sm font-normal text-gray-400 ">
-      Title
+    <form onSubmit={handleSubmit}>
+     <label className="block mt-10 mx-auto max-w-2xl text-lg font-normal text-gray-200" onChange={handleAddress}>
+      To
      </label>
      <input
-      type="email"
-      id="email"
       aria-describedby="helper-text-explanation"
-      className=" border mx-auto max-w-2xl border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
-      placeholder="Any Title"
+      className=" border mx-auto max-w-2xl  text-gray-900 text-sm rounded-lg  block w-full p-2.5  border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
+      placeholder="receiver address"
+      value={Address}
+      onChange={handleAddress}
+     />
+     <label className="block mt-10 mx-auto max-w-2xl text-lg font-normal text-gray-200 ">Amount</label>
+     <input
+      type="number"
+      min="0"
+      className=" border mx-auto max-w-2xl  text-gray-900 text-sm rounded-lg  block w-full p-2.5  border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
+      placeholder="amount in Ether"
+      onChange={handleEther}
+      value={Ether}
      />
 
-     <label htmlFor="message" className=" mt-10 block  mb-2 text-sm font-medium text-gray-400 mx-auto max-w-2xl ">
-      Your message
+     <label htmlFor="message" className=" mt-10 block  mb-2 text-lg font-medium text-gray-200 mx-auto max-w-2xl ">
+      Description
      </label>
      <textarea
       id="message"
       rows="6"
-      className="block p-2.5 w-full mx-auto max-w-2xl text-sm   rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-      placeholder="Leave a comment..."
+      className="block p-2.5 w-full mx-auto max-w-2xl text-sm rounded-lg border  focus:ring-blue-500 focus:border-blue-500 border-gray-600 placeholder-gray-400 text-black "
+      placeholder="Write the description for the proposal"
+      value={Description}
+      onChange={handleDescription}
      ></textarea>
-
-     <label htmlFor="email" className="block mt-10 mx-auto max-w-2xl text-sm font-normal text-gray-400 ">
+     {/* <label htmlFor="email" className="block mt-10 mx-auto max-w-2xl text-lg font-normal text-gray-200 ">
       Discussion(Optional)
      </label>
      <input
       type="email"
       id="email"
       aria-describedby="helper-text-explanation"
-      className=" border mx-auto max-w-2xl border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
+      className=" border mx-auto max-w-2xl  text-gray-900 text-sm rounded-lg  block w-full p-2.5  border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
       placeholder="https://forum.balancer.fi/proposal"
-     />
+     /> */}
+     <div className="mx-auto max-w-2xl text-center">
+      <button className="bg-cyan-700 w-40 p-2 rounded-lg mt-10 ext font-bold text-white">CREATE</button>
+     </div>
     </form>
    </div>
   </>

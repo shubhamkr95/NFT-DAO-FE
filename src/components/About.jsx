@@ -1,6 +1,41 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 const About = () => {
+ const [Data, setData] = useState("");
+ const [Loading, setLoading] = useState(true);
+
+ const fetchNft = async () => {
+  const url = `https://deep-index.moralis.io/api/v2/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B/nft/0x2fFda8135aE1fc22b84EC6F8d185D8F3dFC9a352?chain=mumbai&format=decimal`;
+
+  fetch(url, {
+   method: "GET",
+   headers: {
+    "Content-Type": "application/json;charset=UTF-8",
+    "x-api-key": process.env.REACT_APP_API_KEY,
+   },
+  })
+   .then((res) => res.json())
+   .then((json) => {
+    setData(json);
+    setLoading(false);
+   })
+   .catch((err) => {
+    console.log(err);
+   });
+ };
+
+ useEffect(() => {
+  fetchNft();
+ }, []);
+
+ if (Loading) {
+  return (
+   <main style={{ padding: "1rem 0" }}>
+    <h2 className="text-white ml-10">Loading...</h2>
+   </main>
+  );
+ }
  return (
   <div>
    <>
@@ -12,16 +47,13 @@ const About = () => {
      style={{ borderColor: "#2d2d2d" }}
     >
      <h1 className=" text-gray-50 text-lg font-semibold">Network</h1>
-     <p className="font-normal text-gray-400">Ethereum mainnet</p>
+     <p className="font-normal text-gray-400">Polygon Testnet</p>
 
      <h1 className=" text-gray-50 text-lg font-semibold mt-4">Proposal Validation</h1>
      <p className="font-normal text-gray-400 ">basic</p>
 
      <h1 className=" text-gray-50 text-lg font-semibold mt-4">Voting Strategy</h1>
-     <p className="font-normal text-gray-400 ">Multichain</p>
-
-     <h1 className=" text-gray-50 text-lg font-semibold mt-4">Plugins</h1>
-     <p className="font-normal text-gray-400 ">poap</p>
+     <p className="font-normal text-gray-400 ">Single chain</p>
     </div>
     <div>
      <ul
@@ -38,42 +70,13 @@ const About = () => {
        className="flex flex-row py-2 px-4 w-full border-b border-gray-200 dark:border-gray-600"
        style={{ borderColor: "#2d2d2d" }}
       >
-       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
-       0x35EA...14B7
-      </li>
-     </ul>
-    </div>
-    <div>
-     <ul
-      className="mx-auto max-w-xl mt-5 mb-5 text-lg font-medium rounded-lg border   text-white"
-      style={{ borderColor: "#2d2d2d" }}
-     >
-      <li className="py-3 px-4 w-full rounded-t-lg border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       Authors
-      </li>
-      <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
-       0x47f8...32a1
-      </li>
-      <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/042.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
-       abvavgjoe.eth
-      </li>
-      <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/043.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
-       redvan.eth
-      </li>
-      <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/044.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
-       grendel.eth
-      </li>
-      <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/045.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
-       frogmonkee.eth
-      </li>
-      <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/046.jpg" className=" h-8 w-8 rounded-full" alt="" />{" "}
-       icedcool.eth
+       <img src={Data.result[0].token_uri} className=" h-14 w-14 rounded-full" alt="" />{" "}
+       <a
+        href="https://mumbai.polygonscan.com/address/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B"
+        className="mt-3 ml-3"
+       >
+        0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B
+       </a>
       </li>
      </ul>
     </div>

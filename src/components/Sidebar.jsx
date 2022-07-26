@@ -16,12 +16,6 @@ export const Sidebar = () => {
     <MdOutlineVerified style={{ fontSize: "30px" }} />
    </h5>
    <p className="font-normal text-gray-400 text-center">20k members</p>
-   <a
-    href="#"
-    className=" flex m-4 flex-row justify-center text-sm px-4 py-2 leading-none border rounded-full text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 "
-   >
-    Join
-   </a>
 
    <ul className="space-y-2">
     <li>
@@ -30,7 +24,7 @@ export const Sidebar = () => {
       className="flex items-center ml-3 p-2 text-base font-normal  rounded-lg text-white hover:bg-gray-700"
      >
       {" "}
-      Proposal
+      Proposals
      </NavLink>
     </li>
     <li>

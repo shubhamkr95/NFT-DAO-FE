@@ -2,15 +2,26 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { governanceContract, provider } from "../utils/Connectors";
+import Axios from "axios";
 
 const Sidetabs = () => {
  const [ProposalSnapshot, setProposalSnapshot] = useState(0);
+ const [StartBlock, setStartBlock] = useState(0);
+ const [EndBlock, setEndBlock] = useState(0);
+ const [ProposalVotes, setProposalVotes] = useState("");
 
- useEffect(() => {
-  async function receipt() {
-   const events = await provider.getTransactionReceipt(
-    "0xeae0c5becc6e12701670a9144099a81170516829233031fd310ef313a7d183a9"
-   );
+ const hash = async () => {
+  Axios.get("http://127.0.0.1:5000/api/proposalHash")
+   .then((res) => {
+    const txHash = res.data[0].proposal_hash.toString();
+    receipt(txHash);
+   })
+   .catch((error) => console.log(`Error: ${error}`));
+ };
+
+ async function receipt(hash) {
+  try {
+   const events = await provider.getTransactionReceipt(hash);
    const logs = events.logs[0].data;
 
    const data = ethers.utils.defaultAbiCoder.decode(
@@ -20,11 +31,20 @@ const Sidetabs = () => {
 
    const ID = data[0].toString();
    const snapshot = await governanceContract.proposalSnapshot(ID);
-
    setProposalSnapshot(snapshot.toString());
-  }
 
-  receipt();
+   setStartBlock(data[6].toString());
+   setEndBlock(data[7].toString());
+
+   const proposalVotes = await governanceContract.proposalVotes(ID);
+   setProposalVotes(proposalVotes.toString());
+  } catch (error) {
+   console.error(error);
+  }
+ }
+
+ useEffect(() => {
+  hash();
  }, []);
 
  return (
@@ -37,42 +57,27 @@ const Sidetabs = () => {
      <li className="py-2 px-4 w-full rounded-t-lg border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
       information
      </li>
-     <li
-      className="flex flex-row justify-between py-2 px-4 w-full border-b border-gray-600"
-      style={{ borderColor: "#2d2d2d" }}
-     >
-      <div style={{ color: "#8b949e" }}>Strategie(s)</div>
-      <div>
-       <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" className=" h-6 w-6 rounded-full" alt="" />
-      </div>
-     </li>
-     <li
-      className="flex flex-row justify-between py-2 px-4 w-full border-b border-gray-600"
-      style={{ borderColor: "#2d2d2d" }}
-     >
-      <div style={{ color: "#8b949e" }}>IPFS</div>
-      <div className="text-white">#bafkrei</div>
-     </li>
+
      <li
       className="flex flex-row justify-between py-2 px-4 w-full border-b border-gray-600"
       style={{ borderColor: "#2d2d2d" }}
      >
       <div style={{ color: "#8b949e" }}>Voting system</div>
-      <div className="text-white">Single choice voting</div>
+      <div className="text-white">Single NFT voting</div>
      </li>
      <li
       className="flex flex-row justify-between py-2 px-4 w-full border-b border-gray-600"
       style={{ borderColor: "#2d2d2d" }}
      >
-      <div style={{ color: "#8b949e" }}>Start date</div>
-      <div className="text-white">Jul 12, 2022, 7:47 PM</div>
+      <div style={{ color: "#8b949e" }}>Start Block</div>
+      <div className="text-white">{StartBlock}</div>
      </li>
      <li
       className="flex flex-row justify-between py-2 px-4 w-full border-b border-gray-600"
       style={{ borderColor: "#2d2d2d" }}
      >
-      <div style={{ color: "#8b949e" }}>End date</div>
-      <div className="text-white">Jul 16, 2022, 2:30 PM</div>
+      <div style={{ color: "#8b949e" }}>End Block</div>
+      <div className="text-white">{EndBlock}</div>
      </li>
      <li
       className="flex flex-row justify-between py-2 px-4 w-full border-b border-gray-600"
@@ -89,34 +94,16 @@ const Sidetabs = () => {
      style={{ borderColor: "#2d2d2d" }}
     >
      <li className="py-2 px-4 w-full rounded-t-lg border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-      Admins
+      Votes
      </li>
      <li className=" py-2 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-      <div>I’d stake Cake.. 19 CAKEVO.. 95.09%</div>
-      <div>
-       <progress className="w-full rounded h-1 " id="file" value="95" max="100">
-        {" "}
-        95%{" "}
-       </progress>
-      </div>
+      <div>Against Votes - {ProposalVotes[0]}</div>
      </li>
      <li className=" py-2 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-      <div>I’d add liquidity.. 1CAKEVO.. 4.91%</div>
-      <div>
-       <progress className="w-full rounded h-1 " id="file" value="4" max="100">
-        {" "}
-        4%{" "}
-       </progress>
-      </div>
+      <div>For Votes - {ProposalVotes[2]}</div>
      </li>
      <li className=" py-2 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-      <div>No carbo pool.. 0CAKEVO.. 0%</div>
-      <div>
-       <progress className="w-full rounded h-1 " id="file" value="0" max="100">
-        {" "}
-        0{" "}
-       </progress>
-      </div>
+      <div>Abstain - {ProposalVotes[4]}</div>
      </li>
     </ul>
    </div>
