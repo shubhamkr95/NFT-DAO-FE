@@ -72,7 +72,7 @@ const Details = () => {
        <button className="bg-green-500 text-white font-bold  px-1 rounded-full">Active</button>
       ) : Stage === 7 ? (
        <button className="bg-violet-500 text-white font-bold  px-1 rounded-full">Closed</button>
-      ) : Stage === 3 ? (
+      ) : Stage === 3 || Stage === 6 ? (
        <button className="bg-red-500 hover:bg-blue-700 text-white font-bold  px-1 rounded-full">Rejected</button>
       ) : (
        <button className="bg-yellow-500 hover:bg-blue-700 text-white font-bold  px-1 rounded-full">Pending</button>

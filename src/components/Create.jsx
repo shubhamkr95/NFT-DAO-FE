@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { governanceContract, provider } from "../utils/Connectors";
 
 export const Create = () => {
  const navigate = useNavigate();
@@ -37,6 +38,7 @@ export const Create = () => {
  const handleSubmit = async (e) => {
   try {
    e.preventDefault();
+
    navigate("/");
   } catch (error) {
    console.error(error);
@@ -62,6 +64,7 @@ export const Create = () => {
       placeholder="receiver address"
       value={Address}
       onChange={handleAddress}
+      required={true}
      />
      <label className="block mt-10 mx-auto max-w-2xl text-lg font-normal text-gray-200 ">Amount</label>
      <input
@@ -71,6 +74,7 @@ export const Create = () => {
       placeholder="amount in Ether"
       onChange={handleEther}
       value={Ether}
+      required={true}
      />
 
      <label htmlFor="message" className=" mt-10 block  mb-2 text-lg font-medium text-gray-200 mx-auto max-w-2xl ">
@@ -83,17 +87,8 @@ export const Create = () => {
       placeholder="Write the description for the proposal"
       value={Description}
       onChange={handleDescription}
+      required={true}
      ></textarea>
-     {/* <label htmlFor="email" className="block mt-10 mx-auto max-w-2xl text-lg font-normal text-gray-200 ">
-      Discussion(Optional)
-     </label>
-     <input
-      type="email"
-      id="email"
-      aria-describedby="helper-text-explanation"
-      className=" border mx-auto max-w-2xl  text-gray-900 text-sm rounded-lg  block w-full p-2.5  border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
-      placeholder="https://forum.balancer.fi/proposal"
-     /> */}
      <div className="mx-auto max-w-2xl text-center">
       <button className="bg-cyan-700 w-40 p-2 rounded-lg mt-10 ext font-bold text-white">CREATE</button>
      </div>
