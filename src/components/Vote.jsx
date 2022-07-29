@@ -39,7 +39,7 @@ const Vote = (props) => {
  if (Stage !== 1) {
   return (
    <div>
-    <p className="text-white mt-10 text-3xl hover:text-green-700">Voting period is over</p>;
+    <p className="text-white mt-10 text-3xl hover:text-green-700">Voting period is over</p>
    </div>
   );
  } else {
