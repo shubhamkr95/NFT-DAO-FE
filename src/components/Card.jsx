@@ -1,12 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-// import { ethers } from "ethers";
-import { governanceContract, provider } from "../utils/Connectors";
+import { governanceContract } from "../utils/Connectors";
 import { Loader } from "./Loader";
 import Axios from "axios";
 
 const Card = () => {
- const [Stage, setStage] = useState("");
+ const [Stage, setStage] = useState([]);
  const [Loading, setLoading] = useState(true);
  const [Data, setData] = useState([]);
 
@@ -14,20 +13,19 @@ const Card = () => {
   hash();
  }, []);
 
- Data.map(async (item) => {
-  const state = await governanceContract.state(item.id.toString());
-  setStage(state);
- });
-
  const hash = async () => {
-  Axios.get("http://127.0.0.1:5000/api/proposal_hash")
+  Axios.get("http://127.0.0.1:5000/api/")
    .then((res) => {
     setData(res.data);
    })
    .catch((error) => console.log(`Error: ${error}`));
 
+  Data.map(async (item) => {
+   let arr = [];
+   arr.push(await governanceContract.state(item.id.toString()));
+   setStage([...Stage, arr]);
+  });
   setLoading(false);
-  console.log(Stage);
  };
 
  if (Loading) {
@@ -37,9 +35,9 @@ const Card = () => {
    return (
     <div key={item.objId}>
      <a
-      href="/Details"
+      href={`/views/${item.objId}`}
       className="block p-7 m-3 max-w-2xl    rounded-lg border shadow-md hover:bg-gray-700"
-      style={{ borderColor: "#2d2d2d" }}
+      style={{ borderColor: "#2d2d2d", width: "800px" }}
      >
       <div className="mb-3 flex flex-row justify-between">
        <div className="flex flex-row">
@@ -52,9 +50,9 @@ const Card = () => {
         ) : Stage === 7 ? (
          <button className="bg-violet-500 text-white font-bold  px-3 rounded-full">Closed</button>
         ) : Stage === 3 ? (
-         <button className="bg-red-500 hover:bg-blue-700 text-white font-bold  px-3 rounded-full">Defeated</button>
+         <button className="bg-red-500  text-white font-bold  px-3 rounded-full">Defeated</button>
         ) : (
-         <button className="bg-yellow-500 hover:bg-blue-700 text-white font-bold  px-3 rounded-full">Pending</button>
+         <button className="bg-yellow-500  text-white font-bold  px-3 rounded-full">Pending</button>
         )}
        </div>
       </div>
@@ -63,7 +61,6 @@ const Card = () => {
        20
       )}`}</h5>
       <p className="font-normal text-gray-400">Proposal ID - {`${item.id.slice(0, 30)}...`}</p>
-      <p className="font-normal text-gray-400">7 days left</p>
      </a>
     </div>
    );

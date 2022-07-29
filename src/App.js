@@ -9,6 +9,7 @@ import Aboutpage from "./pages/Aboutpage";
 import Detailspage from "./pages/Detailspage";
 import { Route, Routes } from "react-router-dom";
 import Nftpage from "./pages/Nftpage";
+import NoPageFound from "./pages/NoPageFound";
 
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
@@ -41,8 +42,9 @@ export default function App() {
       <Route path="/Create" element={<Createpage />} />
       <Route path="/Treasury" element={<Treasurypage />} />
       <Route path="/About" element={<Aboutpage />} />
-      <Route path="/Details" element={<Detailspage />} />
+      <Route path="/views/:id" element={<Detailspage />} />
       <Route path="/Nft" element={<Nftpage />} />
+      <Route path="*" element={<NoPageFound />}></Route>
      </Routes>
     </div>
    </RainbowKitProvider>

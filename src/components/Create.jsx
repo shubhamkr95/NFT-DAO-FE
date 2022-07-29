@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { ethers } from "ethers";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { governanceContract, provider } from "../utils/Connectors";
+import { governanceContract, treasuryContract, treasuryAddress } from "../utils/Connectors";
 
 export const Create = () => {
  const navigate = useNavigate();
  const [Address, setAddress] = useState("");
  const [Ether, setEther] = useState(0);
  const [Description, setDescription] = useState("");
+ const [Data, setData] = useState("");
 
  const handleAddress = async (e) => {
   try {
@@ -39,6 +41,24 @@ export const Create = () => {
   try {
    e.preventDefault();
 
+   const encodeFunctionCall = treasuryContract.interface.encodeFunctionData("withdrawFunds", [
+    Address,
+    ethers.utils.parseEther(Ether, "ether"),
+   ]);
+
+   const tx = await governanceContract.propose([treasuryAddress], [0], [encodeFunctionCall], Description);
+
+   const proposeTx = { hash: tx.hash };
+
+   fetch("http://127.0.0.1:5000/api/create", {
+    method: "POST",
+    body: JSON.stringify(proposeTx),
+    headers: {
+     "Content-Type": "application/json",
+    },
+   })
+    .then((res) => res.text())
+    .then((data) => setData(data));
    navigate("/");
   } catch (error) {
    console.error(error);
@@ -93,6 +113,7 @@ export const Create = () => {
       <button className="bg-cyan-700 w-40 p-2 rounded-lg mt-10 ext font-bold text-white">CREATE</button>
      </div>
     </form>
+    <p className="text-white">{Data}</p>
    </div>
   </>
  );

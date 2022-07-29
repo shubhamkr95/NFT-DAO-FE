@@ -1,51 +1,41 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { ethers } from "ethers";
-import { governanceContract, provider } from "../utils/Connectors";
-import Axios from "axios";
+import { governanceContract } from "../utils/Connectors";
+import { useParams } from "react-router-dom";
 
 const Sidetabs = () => {
  const [ProposalSnapshot, setProposalSnapshot] = useState(0);
  const [StartBlock, setStartBlock] = useState(0);
  const [EndBlock, setEndBlock] = useState(0);
  const [ProposalVotes, setProposalVotes] = useState("");
+ const { id } = useParams();
+
+ useEffect(() => {
+  hash();
+ }, []);
 
  const hash = async () => {
-  Axios.get("http://127.0.0.1:5000/api/proposalHash")
-   .then((res) => {
-    const txHash = res.data[0].proposal_hash.toString();
-    receipt(txHash);
+  fetch(`http://127.0.0.1:5000/api/views/${id}`)
+   .then((res) => res.json())
+   .then((data) => {
+    setStartBlock(data.startBlock);
+    setEndBlock(data.endBlock);
+    receipt(data.proposal_id.toString());
    })
    .catch((error) => console.log(`Error: ${error}`));
  };
 
- async function receipt(hash) {
+ const receipt = async (ID) => {
   try {
-   const events = await provider.getTransactionReceipt(hash);
-   const logs = events.logs[0].data;
-
-   const data = ethers.utils.defaultAbiCoder.decode(
-    ["uint256", "address", "address[]", "uint256[]", "string[]", "bytes[]", "uint256", "uint256", "string"],
-    logs
-   );
-
-   const ID = data[0].toString();
    const snapshot = await governanceContract.proposalSnapshot(ID);
    setProposalSnapshot(snapshot.toString());
-
-   setStartBlock(data[6].toString());
-   setEndBlock(data[7].toString());
 
    const proposalVotes = await governanceContract.proposalVotes(ID);
    setProposalVotes(proposalVotes.toString());
   } catch (error) {
    console.error(error);
   }
- }
-
- useEffect(() => {
-  hash();
- }, []);
+ };
 
  return (
   <div>
@@ -88,6 +78,7 @@ const Sidetabs = () => {
      </li>
     </ul>
    </div>
+
    <div>
     <ul
      className="mx-auto w-72 mt-5 font-normal  rounded-lg border border-gray-600 text-white"
