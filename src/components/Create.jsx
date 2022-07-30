@@ -48,7 +48,7 @@ export const Create = () => {
 
    const tx = await governanceContract.propose([treasuryAddress], [0], [encodeFunctionCall], Description);
 
-   const proposeTx = { hash: tx.hash, encodeFunctionCall };
+   const proposeTx = { hash: tx.hash };
 
    fetch("http://127.0.0.1:5000/api/create", {
     method: "POST",

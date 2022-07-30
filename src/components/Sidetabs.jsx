@@ -1,8 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { governanceContract } from "../utils/Connectors";
-import { useParams } from "react-router-dom";
-import { Loader } from "./Loader";
 
 const Sidetabs = (props) => {
  const [ProposalSnapshot, setProposalSnapshot] = useState(0);
@@ -33,10 +31,11 @@ const Sidetabs = (props) => {
  const handleExecute = async (e) => {
   e.preventDefault();
 
-  // const encodeFunctionCall = treasuryContract.interface.encodeFunctionData("withdrawFunds", [
-  //  Address,
-  //  ethers.utils.parseEther(Ether, "ether"),
-  // ]);
+  const encodeFunctionCall = data.calldata;
+  const targets = data.targetContract;
+  const values = data.values;
+
+  // const queueTx = await governanceContract.queue;
  };
 
  return (

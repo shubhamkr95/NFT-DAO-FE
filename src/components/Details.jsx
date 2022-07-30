@@ -4,13 +4,10 @@ import { useEffect, useState } from "react";
 import { Loader } from "./Loader";
 
 const Details = (prop) => {
- const [Description, setDescription] = useState("");
- const [ProposalID, setProposalID] = useState([]);
  const [QuorumPercentage, setQuorumPercentage] = useState(0);
  const [ProposalThreshold, setProposalThreshold] = useState(0);
  const [Loading, setLoading] = useState(true);
  const [Stage, setStage] = useState({});
- const [Address, setAddress] = useState("");
 
  const { data } = prop;
 
