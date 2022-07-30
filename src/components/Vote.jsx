@@ -8,16 +8,16 @@ const Vote = (props) => {
  const [Stage, setStage] = useState("");
  const [ProposalID, setProposalID] = useState("");
 
- const { ID } = props;
+ //  const { ID } = props;
 
  useEffect(() => {
-  fetch(`http://127.0.0.1:5000/api/views/${ID}`)
-   .then((res) => res.json())
-   .then((data) => {
-    receipt(data.proposal_id.toString());
-    setProposalID(data.proposal_id.toString());
-   })
-   .catch((error) => console.log(`Error: ${error}`));
+  // fetch(`http://127.0.0.1:5000/api/views/${ID}`)
+  //  .then((res) => res.json())
+  //  .then((data) => {
+  //   receipt(data.proposal_id.toString());
+  //   setProposalID(data.proposal_id.toString());
+  //  })
+  //  .catch((error) => console.log(`Error: ${error}`));
  }, []);
 
  const receipt = async (id) => {
@@ -57,7 +57,7 @@ const Vote = (props) => {
        <button
         id="0"
         className="text-white ml-5 mt-5 mx-auto font-bold w-11/12  py-2 rounded-full border hover:to-blue-800"
-        style={{ borderColor: "#2d2d2d" }}
+        // style={{ borderColor: "#2d2d2d" }}
         onClick={handleButton}
        >
         Vote against the proposal
@@ -65,7 +65,7 @@ const Vote = (props) => {
        <button
         id="1"
         className="text-white ml-5 mt-5 mx-auto font-bold w-11/12  py-2 rounded-full border hover:to-blue-800"
-        style={{ borderColor: "#2d2d2d" }}
+        // style={{ borderColor: "#2d2d2d" }}
         onClick={handleButton}
        >
         Vote for the proposal
@@ -73,7 +73,7 @@ const Vote = (props) => {
        <button
         id="2"
         className="text-white ml-5 mt-5 mb-5  w-11/12  mx-auto font-bold  py-2 rounded-full border hover:to-blue-600"
-        style={{ borderColor: "#2d2d2d" }}
+        // style={{ borderColor: "#2d2d2d" }}
         onClick={handleButton}
        >
         Abstain your vote

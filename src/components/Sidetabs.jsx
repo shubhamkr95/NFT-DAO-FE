@@ -2,31 +2,24 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { governanceContract } from "../utils/Connectors";
 import { useParams } from "react-router-dom";
+import { Loader } from "./Loader";
 
-const Sidetabs = () => {
+const Sidetabs = (props) => {
  const [ProposalSnapshot, setProposalSnapshot] = useState(0);
- const [StartBlock, setStartBlock] = useState(0);
- const [EndBlock, setEndBlock] = useState(0);
+ const [Stage, setStage] = useState("");
  const [ProposalVotes, setProposalVotes] = useState("");
- const { id } = useParams();
+ const { data } = props;
 
  useEffect(() => {
-  hash();
- }, []);
+  receipt(data.proposal_id);
+ }, [data]);
 
- const hash = async () => {
-  fetch(`http://127.0.0.1:5000/api/views/${id}`)
-   .then((res) => res.json())
-   .then((data) => {
-    setStartBlock(data.startBlock);
-    setEndBlock(data.endBlock);
-    receipt(data.proposal_id.toString());
-   })
-   .catch((error) => console.log(`Error: ${error}`));
- };
-
- const receipt = async (ID) => {
+ const receipt = async (id) => {
   try {
+   const ID = id.toString();
+   const stage = await governanceContract.state(ID);
+   setStage(stage);
+
    const snapshot = await governanceContract.proposalSnapshot(ID);
    setProposalSnapshot(snapshot.toString());
 
@@ -35,6 +28,15 @@ const Sidetabs = () => {
   } catch (error) {
    console.error(error);
   }
+ };
+
+ const handleExecute = async (e) => {
+  e.preventDefault();
+
+  // const encodeFunctionCall = treasuryContract.interface.encodeFunctionData("withdrawFunds", [
+  //  Address,
+  //  ethers.utils.parseEther(Ether, "ether"),
+  // ]);
  };
 
  return (
@@ -60,14 +62,14 @@ const Sidetabs = () => {
       style={{ borderColor: "#2d2d2d" }}
      >
       <div style={{ color: "#8b949e" }}>Start Block</div>
-      <div className="text-white">{StartBlock}</div>
+      <div className="text-white">{data.startBlock}</div>
      </li>
      <li
       className="flex flex-row justify-between py-2 px-4 w-full border-b border-gray-600"
       style={{ borderColor: "#2d2d2d" }}
      >
       <div style={{ color: "#8b949e" }}>End Block</div>
-      <div className="text-white">{EndBlock}</div>
+      <div className="text-white">{data.endBlock}</div>
      </li>
      <li
       className="flex flex-row justify-between py-2 px-4 w-full border-b border-gray-600"
@@ -78,7 +80,6 @@ const Sidetabs = () => {
      </li>
     </ul>
    </div>
-
    <div>
     <ul
      className="mx-auto w-72 mt-5 font-normal  rounded-lg border border-gray-600 text-white"
@@ -98,19 +99,23 @@ const Sidetabs = () => {
      </li>
     </ul>
    </div>
-   <div className="w-72 h-30 mt-5  rounded-lg border" style={{ borderColor: "#2d2d2d" }}>
-    <div className="mt-2 mx-auto ">
-     <h1 className="text-center text-white text-xl font-bold">Execute Proposal</h1>
-     <div className="flex justify-center">
-      <button
-       class=" hover:bg-blue-700 text-gray-400 font-bold py-2 px-4 w-48 mb-5 mt-2 align-center rounded-full"
-       style={{ backgroundColor: "#40474F" }}
-      >
-       Execute
-      </button>
+   {Stage !== 4 ? (
+    <></>
+   ) : (
+    <div className="w-72 h-30 mt-5  rounded-lg border" style={{ borderColor: "#2d2d2d" }}>
+     <div className="mt-2 mx-auto ">
+      <h1 className="text-center text-white text-xl font-bold">Execute Proposal</h1>
+      <div className="flex justify-center">
+       <button
+        className=" text-gray-100 font-bold py-2 px-4 w-48 mb-5 mt-2 align-center rounded-full hover:bg-blue-500"
+        onClick={handleExecute}
+       >
+        Execute
+       </button>
+      </div>
      </div>
     </div>
-   </div>
+   )}
   </div>
  );
 };

@@ -10,14 +10,6 @@ const Card = (prop) => {
  const { data } = prop;
 
  useEffect(() => {
-  // function main() {
-  //  data.map(async (item) => {
-  //   let arr = {
-  //    ids: await governanceContract.state(item.id.toString()),
-  //   };
-  //  });
-  //  console.log(Stage);
-  // }
   async function main() {
    const ids = await governanceContract.state(data.id.toString());
    setStage(ids);
@@ -30,7 +22,6 @@ const Card = (prop) => {
  if (Loading) {
   return <Loader />;
  } else {
-  // return data.map((item) => {
   return (
    <div key={data.objId}>
     <a
@@ -61,7 +52,6 @@ const Card = (prop) => {
     </a>
    </div>
   );
-  // });
  }
 };
 
