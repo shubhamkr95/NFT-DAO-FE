@@ -98,6 +98,19 @@ const Sidetabs = () => {
      </li>
     </ul>
    </div>
+   <div className="w-72 h-30 mt-5  rounded-lg border" style={{ borderColor: "#2d2d2d" }}>
+    <div className="mt-2 mx-auto ">
+     <h1 className="text-center text-white text-xl font-bold">Execute Proposal</h1>
+     <div className="flex justify-center">
+      <button
+       class=" hover:bg-blue-700 text-gray-400 font-bold py-2 px-4 w-48 mb-5 mt-2 align-center rounded-full"
+       style={{ backgroundColor: "#40474F" }}
+      >
+       Execute
+      </button>
+     </div>
+    </div>
+   </div>
   </div>
  );
 };
