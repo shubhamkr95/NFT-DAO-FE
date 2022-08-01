@@ -6,21 +6,15 @@ import { useNavigate } from "react-router-dom";
 const Vote = (props) => {
  const navigate = useNavigate();
  const [Stage, setStage] = useState("");
- const [ProposalID, setProposalID] = useState("");
 
- //  const { ID } = props;
+ const { data } = props;
 
  useEffect(() => {
-  // fetch(`http://127.0.0.1:5000/api/views/${ID}`)
-  //  .then((res) => res.json())
-  //  .then((data) => {
-  //   receipt(data.proposal_id.toString());
-  //   setProposalID(data.proposal_id.toString());
-  //  })
-  //  .catch((error) => console.log(`Error: ${error}`));
- }, []);
+  receipt(data);
+ }, [data]);
 
- const receipt = async (id) => {
+ const receipt = async (IDS) => {
+  const id = IDS.proposal_id.toString();
   const state = await governanceContract.state(id);
   setStage(state);
  };
@@ -28,9 +22,10 @@ const Vote = (props) => {
  const handleButton = async (e) => {
   try {
    const choice = Number(e.target.id);
-   const voteTx = await governanceContract.castVote(ProposalID, choice);
-   console.log(voteTx);
-   navigate("/");
+   const Tx = await governanceContract.castVote(data.proposal_id.toString(), choice);
+   const voteTX = await Tx.wait();
+   console.log(voteTX);
+   // navigate("/");
   } catch (error) {
    console.error(`Error - ${error}`);
   }
@@ -56,24 +51,24 @@ const Vote = (props) => {
       <li className=" py-2 px-4 w-full border-b  border-gray-600" style={{ borderColor: "#2d2d2d" }}>
        <button
         id="0"
-        className="text-white ml-5 mt-5 mx-auto font-bold w-11/12  py-2 rounded-full border hover:to-blue-800"
-        // style={{ borderColor: "#2d2d2d" }}
+        className="text-white ml-5 mt-5 mx-auto font-bold w-11/12  py-2 rounded-full border hover:bg-blue-600"
+        style={{ borderColor: "#2d2d2d" }}
         onClick={handleButton}
        >
         Vote against the proposal
        </button>
        <button
         id="1"
-        className="text-white ml-5 mt-5 mx-auto font-bold w-11/12  py-2 rounded-full border hover:to-blue-800"
-        // style={{ borderColor: "#2d2d2d" }}
+        className="text-white ml-5 mt-5 mx-auto font-bold w-11/12  py-2 rounded-full border hover:bg-blue-600"
+        style={{ borderColor: "#2d2d2d" }}
         onClick={handleButton}
        >
         Vote for the proposal
        </button>
        <button
         id="2"
-        className="text-white ml-5 mt-5 mb-5  w-11/12  mx-auto font-bold  py-2 rounded-full border hover:to-blue-600"
-        // style={{ borderColor: "#2d2d2d" }}
+        className="text-white ml-5 mt-5 mb-5  w-11/12  mx-auto font-bold  py-2 rounded-full border hover:bg-blue-600"
+        style={{ borderColor: "#2d2d2d" }}
         onClick={handleButton}
        >
         Abstain your vote

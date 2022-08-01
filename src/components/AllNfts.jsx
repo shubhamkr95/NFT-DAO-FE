@@ -33,7 +33,7 @@ const AllNfts = () => {
 
  useEffect(() => {
   fetchNft();
- }, []);
+ }, [Data]);
 
  if (Loading) {
   return (
@@ -48,9 +48,15 @@ const AllNfts = () => {
     <h1 className=" m-5 text-white text-2xl">NFT's</h1>
    </div>
    <div className="grid grid-cols-4 gap-8 max-w-3xl mx-auto m-10">
-    <div>
-     <img src={Data.result[0].token_uri} className="w-40 h-60" alt="" />
-    </div>
+    {Data.result.length !== 0 ? (
+     <div className="flex flex-row mt-4  ">
+      <img src={Data.result[0].token_uri} className=" h-40 w-60 rounded-lg" alt="" />
+     </div>
+    ) : (
+     <div className="flex flex-row mt-4  ">
+      <img src="" className=" h-40 w-60 rounded-lg" alt="" />
+     </div>
+    )}
    </div>
   </div>
  );

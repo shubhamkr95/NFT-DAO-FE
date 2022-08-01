@@ -1,5 +1,7 @@
+import { ethers } from "ethers";
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { governanceContract } from "../utils/Connectors";
 
 const Sidetabs = (props) => {
@@ -28,14 +30,45 @@ const Sidetabs = (props) => {
   }
  };
 
- const handleExecute = async (e) => {
+ const handleQueue = async (e) => {
   e.preventDefault();
 
   const encodeFunctionCall = data.calldata;
   const targets = data.targetContract;
   const values = data.values;
+  const description = data.proposal_description;
 
-  // const queueTx = await governanceContract.queue;
+  const Tx = await governanceContract.queue(
+   [targets],
+   [values],
+   [encodeFunctionCall],
+   ethers.utils.keccak256(ethers.utils.toUtf8Bytes(description))
+  );
+
+  const queueTx = await Tx.wait();
+  console.log(queueTx);
+ };
+
+ const handleExecute = async (e) => {
+  try {
+   e.preventDefault();
+   const encodeFunctionCall = data.calldata;
+   const targets = data.targetContract;
+   const values = data.values;
+   const description = data.proposal_description;
+
+   const Tx = await governanceContract.execute(
+    [targets],
+    [values],
+    [encodeFunctionCall],
+    ethers.utils.keccak256(ethers.utils.toUtf8Bytes(description))
+   );
+
+   const executeTx = await Tx.wait();
+   console.log(executeTx);
+  } catch (error) {
+   console.error(error);
+  }
  };
 
  return (
@@ -103,10 +136,29 @@ const Sidetabs = (props) => {
    ) : (
     <div className="w-72 h-30 mt-5  rounded-lg border" style={{ borderColor: "#2d2d2d" }}>
      <div className="mt-2 mx-auto ">
+      <h1 className="text-center text-white text-xl font-bold">Queued Proposal</h1>
+      <div className="flex justify-center">
+       <button
+        className=" text-gray-100 font-bold py-2 px-4 w-48 mb-5 mt-2 align-center rounded-full hover:bg-blue-500"
+        style={{ borderColor: "#2d2d2d" }}
+        onClick={handleQueue}
+       >
+        Queue
+       </button>
+      </div>
+     </div>
+    </div>
+   )}
+   {Stage !== 5 ? (
+    <></>
+   ) : (
+    <div className="w-72 h-30 mt-5  rounded-lg border" style={{ borderColor: "#2d2d2d" }}>
+     <div className="mt-2 mx-auto ">
       <h1 className="text-center text-white text-xl font-bold">Execute Proposal</h1>
       <div className="flex justify-center">
        <button
         className=" text-gray-100 font-bold py-2 px-4 w-48 mb-5 mt-2 align-center rounded-full hover:bg-blue-500"
+        style={{ borderColor: "#2d2d2d" }}
         onClick={handleExecute}
        >
         Execute

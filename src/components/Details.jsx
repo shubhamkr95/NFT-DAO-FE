@@ -12,20 +12,20 @@ const Details = (prop) => {
  const { data } = prop;
 
  useEffect(() => {
-  const receipt = async () => {
-   const ID = data.proposal_id.toString();
-   const stage = await governanceContract.state(ID);
-   setStage(stage);
-
-   const quorum = await governanceContract.quorumNumerator();
-   setQuorumPercentage(quorum.toString());
-   const threshold = await governanceContract.proposalThreshold();
-   setProposalThreshold(threshold.toString());
-   setLoading(false);
-  };
-
   receipt(data);
  }, [data, Stage]);
+
+ const receipt = async (data) => {
+  const ID = data.proposal_id.toString();
+  const stage = await governanceContract.state(ID);
+  setStage(stage);
+
+  const quorum = await governanceContract.quorumNumerator();
+  setQuorumPercentage(quorum.toString());
+  const threshold = await governanceContract.proposalThreshold();
+  setProposalThreshold(threshold.toString());
+  setLoading(false);
+ };
 
  if (Loading) {
   return <Loader />;
