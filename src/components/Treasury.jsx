@@ -2,16 +2,18 @@ import React from "react";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
 import { treasuryContract, signer, treasuryAddress, provider } from "../utils/Connectors";
+import ButtonLoader from "./ButtonLoader";
 
 const Treasury = () => {
  const [AccountBalance, setAccountBalance] = useState(0);
  const [Ether, setEther] = useState(0);
  const [TxnHash, setTxnHash] = useState("");
+ const [Loading, setLoading] = useState(false);
 
  const getBalance = async () => {
   const chainId = await provider.getNetwork();
-  if (chainId.chainId !== 80001) {
-   return alert("Please select mumbai testnet");
+  if (chainId.chainId !== 4) {
+   return alert("Please select rinkeby network");
   } else {
    const balance = await treasuryContract.balance();
    const parseBalance = await ethers.utils.formatEther(balance);
@@ -33,8 +35,10 @@ const Treasury = () => {
  const handleSubmit = async (e) => {
   try {
    e.preventDefault();
+   setLoading(true);
    if (Ether < 1) {
     alert("Please enter the minimum value");
+    setLoading(false);
    } else {
     const data = {
      to: treasuryAddress,
@@ -42,10 +46,14 @@ const Treasury = () => {
     };
 
     const txn = await signer.sendTransaction(data);
-    setTxnHash(txn.hash);
+    const Txn = await txn.wait();
+
+    setTxnHash(Txn.transactionHash);
+    setLoading(false);
    }
   } catch (error) {
    console.error(error.message);
+   setLoading(false);
   }
  };
 
@@ -80,11 +88,17 @@ const Treasury = () => {
         onChange={handleEther}
        />
       </label>
-      <div>
-       <button className="bg-cyan-700 w-40 p-2 rounded-lg mt-2">Deposit</button>
-      </div>
+      {!Loading ? (
+       <div>
+        <button className="bg-cyan-700 w-40 p-2 rounded-lg mt-2">Deposit</button>
+       </div>
+      ) : (
+       <ButtonLoader />
+      )}
      </form>
-     <div className="text-gray-400 font-extrabold mt-3">{TxnHash}</div>
+     <a href="`https://rinkeby.etherscan.io/tx/${TxnHash}`" className="text-gray-400 font-extrabold mt-3">
+      {TxnHash}
+     </a>
     </div>
    </div>
   </>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { provider } from "../utils/Connectors";
+import { nftTokenAddress } from "../utils/Connectors";
 
 const AllNfts = () => {
  const [Loading, setLoading] = useState(true);
@@ -9,7 +10,7 @@ const AllNfts = () => {
   try {
    const accounts = await provider.send("eth_requestAccounts", []);
    const address = accounts[0];
-   const url = `https://deep-index.moralis.io/api/v2/${address}/nft/0x2fFda8135aE1fc22b84EC6F8d185D8F3dFC9a352?chain=mumbai&format=decimal`;
+   const url = `https://deep-index.moralis.io/api/v2/${address}/nft/${nftTokenAddress}?chain=rinkeby&format=decimal`;
 
    fetch(url, {
     method: "GET",
@@ -50,7 +51,7 @@ const AllNfts = () => {
    <div className="grid grid-cols-4 gap-8 max-w-3xl mx-auto m-10">
     {Data.result.length !== 0 ? (
      <div className="flex flex-row mt-4  ">
-      <img src={Data.result[0].token_uri} className=" h-40 w-60 rounded-lg" alt="" />
+      <img src={Data.result[0].token_uri} className=" h-60 w-96 rounded-lg" alt="" />
      </div>
     ) : (
      <div className="flex flex-row mt-4  ">

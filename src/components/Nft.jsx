@@ -2,6 +2,7 @@ import React from "react";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { provider } from "../utils/Connectors";
+import { nftTokenAddress } from "../utils/Connectors";
 
 const Nft = () => {
  const [Loading, setLoading] = useState(true);
@@ -11,7 +12,7 @@ const Nft = () => {
   try {
    const accounts = await provider.send("eth_requestAccounts", []);
    const address = accounts[0];
-   const url = `https://deep-index.moralis.io/api/v2/${address}/nft/0x2fFda8135aE1fc22b84EC6F8d185D8F3dFC9a352?chain=mumbai&format=decimal`;
+   const url = `https://deep-index.moralis.io/api/v2/${address}/nft/${nftTokenAddress}?chain=rinkeby&format=decimal`;
 
    fetch(url, {
     method: "GET",

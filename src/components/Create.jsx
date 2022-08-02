@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { governanceContract, treasuryContract, treasuryAddress } from "../utils/Connectors";
+import ButtonLoader from "./ButtonLoader";
 
 export const Create = () => {
  const navigate = useNavigate();
@@ -9,6 +10,7 @@ export const Create = () => {
  const [Ether, setEther] = useState(0);
  const [Description, setDescription] = useState("");
  const [Data, setData] = useState("");
+ const [Loading, setLoading] = useState(false);
 
  const handleAddress = async (e) => {
   try {
@@ -40,6 +42,7 @@ export const Create = () => {
  const handleSubmit = async (e) => {
   try {
    e.preventDefault();
+   setLoading(true);
 
    const encodeFunctionCall = treasuryContract.interface.encodeFunctionData("withdrawFunds", [
     Address,
@@ -62,6 +65,7 @@ export const Create = () => {
    navigate("/");
   } catch (error) {
    console.error(error);
+   setLoading(false);
   }
  };
 
@@ -109,9 +113,13 @@ export const Create = () => {
       onChange={handleDescription}
       required={true}
      ></textarea>
-     <div className="mx-auto max-w-2xl text-center">
-      <button className="bg-cyan-700 w-40 p-2 rounded-lg mt-10 ext font-bold text-white">CREATE</button>
-     </div>
+     {!Loading ? (
+      <div className="mx-auto max-w-2xl text-center">
+       <button className="bg-cyan-700 w-40 p-2 rounded-lg mt-10 ext font-bold text-white">CREATE</button>
+      </div>
+     ) : (
+      <ButtonLoader />
+     )}
     </form>
     <p className="text-white">{Data}</p>
    </div>
