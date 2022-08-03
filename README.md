@@ -1,5 +1,24 @@
 # Getting Started with Create React App
 
+# Environment
+
+```
+REACT_APP_API_KEY= Moralis API key
+GENERATE_SOURCEMAP=false
+```
+
+# Installation
+
+```
+git clone https://github.com/shubhamkr95/NFT-DAO-FE.git
+
+cd NDT-DAO-FE
+
+npm install
+
+npm start
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
