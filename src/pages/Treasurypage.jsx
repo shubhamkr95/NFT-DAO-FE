@@ -19,7 +19,7 @@ const Treasurypage = () => {
   <div>
    <Navbar />
    <div className="flex flex-col md:flex-row justify-center">
-    <div>
+    <div className="mt-7">
      <Sidebar />
     </div>
 
@@ -29,6 +29,9 @@ const Treasurypage = () => {
      </div>
      <div className="mt-5">
       <Treasury />
+     </div>
+     <div className="mt-5 text-gray-400 ">
+      <h5>Recent Activity</h5>
      </div>
      {Data.map((item, index) => {
       return <Hash data={item} key={index} />;

@@ -72,37 +72,39 @@ const Treasury = () => {
  return (
   <>
    <div className="border rounded-lg p-3" style={{ borderColor: "#2d2d2d" }}>
-    <div className="mx-auto mt-5 max-w-2xl ml-4 text-2xl text-gray-50">
-     <h1>Treasury</h1>
+    <div className="mx-auto  max-w-2xl  text-lg text-gray-400">
+     <h5>Treasury</h5>
     </div>
     <div
-     className="mx-auto mt-2 block p-2 w-48 m-2 max-w-2xl rounded-lg border shadow-md hover:bg-gray-400"
+     className="mx-auto mt-2 block p-2 w-full m-3  max-w-2xl rounded-lg border shadow-md hover:bg-gray-400"
      style={{ borderColor: "#2d2d2d" }}
     >
-     <div className="text-gray-500 text-xl text-center">
-      <p>Treasury balance</p>
+     <div className="text-gray-500  font-medium ">
+      <p>The Total balance in the treasury is {AccountBalance} ether</p>
      </div>
-     <p className=" text-3xl text-center">
-      <span className="font-extrabold text-gray-50">{AccountBalance}</span>
-      <span className="font-normal text-gray-50"> Ether</span>
-     </p>
     </div>
 
     <div className="mx-auto max-w-2xl text 2xl text-gray-50 text-center">
      <form onSubmit={handleSubmit}>
-      <label htmlFor="MATIC" className="text-gray-400 font-extrabold mr-1">
-       ETHER
-       <input
-        className="bg-white border border-solid text-black text-center w-20 ml-2 rounded-lg drop-shadow-xl"
-        type="number"
-        min="0"
-        value={Ether}
-        onChange={handleEther}
-       />
+      <label htmlFor="MATIC" className="block mt-5 mb-2 text-left max-w-2xl text-sm font-medium text-gray-400">
+       Ether
       </label>
+      <input
+       className=" border mx-auto max-w-2xl  text-gray-400 text-sm rounded-lg  block w-full p-2.5 bg-transparent border-gray-600  focus:ring-blue-500 focus:border-blue-500"
+       type="number"
+       min="0"
+       style={{ borderColor: "#2d2d2d" }}
+       value={Ether}
+       onChange={handleEther}
+      />
       {!Loading ? (
        <div>
-        <button className="bg-cyan-700 w-40 p-2 rounded-full mt-10">Deposit</button>
+        <button
+         className="bg-transparent border w-full empty:3 px-12 py-2 rounded-full mt-5 font-medium text-gray-400 hover:bg-blue-600"
+         style={{ borderColor: "#2d2d2d" }}
+        >
+         Deposit
+        </button>
        </div>
       ) : (
        <ButtonLoader />
