@@ -30,12 +30,12 @@ https://deep-index.moralis.io/api/v2/nft/${nftTokenAddress}?chain=rinkeby&format
 
  return (
   <div>
-   <div className="max-w-3xl  py-4 px-3 mt-8 ml-5 rounded-xl border" style={{ borderColor: "#2d2d2d" }}>
+   <div className="max-w-2xl  py-4 px-3 mt-8  rounded-xl border" style={{ borderColor: "#2d2d2d" }}>
     <div className="flex flex-row justify-between">
      <div>
-      <h3 className="text-white">NFTS</h3>
+      <h3 className="text-gray-400">NFTS</h3>
      </div>
-     <div className="text-white flex flex-row items-center">
+     <div className="text-gray-400 flex flex-row items-center">
       <a href="/Nft">
        View <BsArrowRightCircle className="ml-2" />
       </a>
