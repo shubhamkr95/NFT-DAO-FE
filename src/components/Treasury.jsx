@@ -5,8 +5,7 @@ import { treasuryContract, signer, treasuryAddress, provider, url } from "../uti
 import ButtonLoader from "./ButtonLoader";
 import { useNavigate } from "react-router-dom";
 
-const Treasury = (prop) => {
- const { data } = prop;
+const Treasury = () => {
  const navigate = useNavigate();
  const [AccountBalance, setAccountBalance] = useState(0);
  const [Ether, setEther] = useState(0);
@@ -26,8 +25,7 @@ const Treasury = (prop) => {
 
  useEffect(() => {
   getBalance();
-  console.log(data);
- }, [data]);
+ }, []);
 
  const handleEther = async (e) => {
   if (typeof e.target.value === String) {
@@ -104,7 +102,7 @@ const Treasury = (prop) => {
       </label>
       {!Loading ? (
        <div>
-        <button className="bg-cyan-700 w-40 p-2 rounded-lg mt-2">Deposit</button>
+        <button className="bg-cyan-700 w-40 p-2 rounded-full mt-10">Deposit</button>
        </div>
       ) : (
        <ButtonLoader />

@@ -3,22 +3,16 @@ import Treasury from "../components/Treasury";
 import { Navbar } from "../components/Navbar";
 import Nft from "../components/Nft.jsx";
 import { Sidebar } from "../components/Sidebar";
-import axios from "axios";
 import { url } from "../utils/Connectors";
+import Hash from "../components/Hash";
 
 const Treasurypage = () => {
  const [Data, setData] = useState([]);
 
- const loadData = async () => {
-  try {
-   axios.get(`${url}transactions`).then((res) => setData(res.data));
-  } catch (error) {
-   console.error(error.message);
-  }
- };
-
  React.useEffect(() => {
-  loadData();
+  fetch(`${url}transactions`)
+   .then((res) => res.json())
+   .then((json) => setData(json));
  }, []);
 
  return (
@@ -34,9 +28,11 @@ const Treasurypage = () => {
       <Nft />
      </div>
      <div className="mt-5">
-      {Data.map((item, index) => {})}
       <Treasury />
      </div>
+     {Data.map((item, index) => {
+      return <Hash data={item} key={index} />;
+     })}
     </div>
    </div>
   </div>

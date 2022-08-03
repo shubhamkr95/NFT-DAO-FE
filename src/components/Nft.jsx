@@ -1,7 +1,6 @@
 import React from "react";
 import { BsArrowRightCircle } from "react-icons/bs";
-import { useEffect, useState } from "react";
-import { provider } from "../utils/Connectors";
+import { useState } from "react";
 import { nftTokenAddress } from "../utils/Connectors";
 import axios from "axios";
 

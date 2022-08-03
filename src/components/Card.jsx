@@ -9,14 +9,14 @@ const Card = (prop) => {
  const { data } = prop;
 
  useEffect(() => {
-  async function main() {
-   const ids = await governanceContract.state(data.id.toString());
+  async function main(propId) {
+   const ids = await governanceContract.state(propId.id.toString());
    setStage(ids);
    setLoading(false);
   }
 
-  main();
- }, []);
+  main(data);
+ }, [data]);
 
  if (Loading) {
   return <Loader />;

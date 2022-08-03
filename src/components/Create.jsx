@@ -79,44 +79,50 @@ export const Create = () => {
    </div>
    <div>
     <form onSubmit={handleSubmit}>
-     <label className="block mt-10 mx-auto max-w-2xl text-sm font-normal text-gray-400" onChange={handleAddress}>
+     <label className="block mt-10 mb-2 mx-auto max-w-2xl text-sm font-normal text-gray-400" onChange={handleAddress}>
       To
      </label>
      <input
       aria-describedby="helper-text-explanation"
-      className=" border mx-auto max-w-2xl  text-gray-900 text-sm rounded-lg  block w-full p-2.5  border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
+      className=" border mx-auto max-w-2xl  text-white text-sm rounded-lg  block w-full p-2.5 bg-transparent border-gray-600  focus:ring-blue-500 focus:border-blue-500"
       placeholder="Receiver address"
+      style={{ borderColor: "#2d2d2d" }}
       value={Address}
       onChange={handleAddress}
       required={true}
      />
-     <label className="block mt-10 mx-auto max-w-2xl text-sm font-medium text-gray-400 ">Amount</label>
+     <label className="block mb-2 mt-10 mx-auto max-w-2xl text-sm font-medium text-gray-400 ">Amount</label>
      <input
       type="number"
       min="0"
-      className=" border mx-auto max-w-2xl  text-gray-400 text-sm rounded-lg  block w-full p-2.5  border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
+      className=" border mx-auto max-w-2xl  text-white text-sm rounded-lg  block w-full p-2.5  border-gray-600 bg-transparent  focus:ring-blue-500 focus:border-blue-500"
       placeholder="amount in Ether"
+      style={{ borderColor: "#2d2d2d" }}
       onChange={handleEther}
       value={Ether}
       required={true}
      />
 
-     <label htmlFor="message" className=" mt-10 block  mb-2 text-sm font-normal text-gray-400 mx-auto max-w-2xl ">
+     <label htmlFor="message" className=" mb-2 mt-10 block   text-sm font-normal text-gray-400 mx-auto max-w-2xl ">
       Description
      </label>
      <textarea
       id="message"
       rows="6"
-      className="block p-2.5 w-full mx-auto max-w-2xl text-sm rounded-lg border  focus:ring-blue-500 focus:border-blue-500 border-gray-600 placeholder-gray-400 text-black "
+      className="block p-2.5 w-full mx-auto max-w-2xl text-sm rounded-lg border bg-transparent focus:ring-blue-500 focus:border-blue-500 border-gray-600  text-white "
       placeholder="Write the description for the proposal"
       value={Description}
+      style={{ borderColor: "#2d2d2d" }}
       onChange={handleDescription}
       required={true}
      ></textarea>
      {!Loading ? (
       <div className="mx-auto max-w-2xl text-center">
-       <button className="bg-white w-full empty:3 px-12 py-2 rounded-full mt-10 ext font-bold text-black hover:bg-blue-600">
-        CREATE
+       <button
+        className="bg-transparent border w-full empty:3 px-12 py-4 rounded-full mt-10 ext font-normal text-white hover:bg-blue-600"
+        style={{ borderColor: "#2d2d2d" }}
+       >
+        Create
        </button>
       </div>
      ) : (
