@@ -13,10 +13,6 @@ export const nftTokenAddress = "0xCB48a311045B8ccBBEaBBee0F117d008F43fB6c9";
 
 export const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-<<<<<<< HEAD
-// export const url = "http://127.0.0.1:5000/api/";
-=======
->>>>>>> ae864b5077315f81fafb47a5af9721479a7bce98
 export const url = "https://still-everglades-35996.herokuapp.com/api/";
 
 export const signer = provider.getSigner();
