@@ -44,8 +44,8 @@ const About = () => {
      <h1>About</h1>
     </div>
     <div
-     className="mx-auto mt-2 block p-6 m-2 max-w-xl rounded-lg border shadow-md "
-     style={{ borderColor: "#2d2d2d", width: "600px" }}
+     className="mx-auto mt-2 block p-6 m-2 max-w-2xl  rounded-lg border shadow-md "
+     style={{ borderColor: "#2d2d2d", width: "700px" }}
     >
      <h1 className=" text-gray-50 text-lg font-semibold">Network</h1>
      <p className="font-normal text-gray-400">Rinkeby Testnet</p>
@@ -72,10 +72,7 @@ const About = () => {
        style={{ borderColor: "#2d2d2d" }}
       >
        <img src={Data.result[0].token_uri.slice(34)} className=" h-14 w-14 rounded-full" alt="" />{" "}
-       <a
-        href="https://mumbai.polygonscan.com/address/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B"
-        className="mt-3 ml-3"
-       >
+       <a href="https://rinkeby.etherscan.io/address/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B" className="mt-3 ml-3">
         0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B
        </a>
       </li>
