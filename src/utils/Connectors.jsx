@@ -13,6 +13,8 @@ export const nftTokenAddress = "0xCB48a311045B8ccBBEaBBee0F117d008F43fB6c9";
 
 export const provider = new ethers.providers.Web3Provider(window.ethereum);
 
+export const url = "http://127.0.0.1:5000/api/";
+
 export const signer = provider.getSigner();
 
 export const treasuryContract = new ethers.Contract(treasuryAddress, treasuryABI.abi, signer);

@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { nftTokenAddress } from "../utils/Connectors";
 
 const About = () => {
  const [Data, setData] = useState("");
  const [Loading, setLoading] = useState(true);
 
  const fetchNft = async () => {
-  const url = `https://deep-index.moralis.io/api/v2/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B/nft/0x2fFda8135aE1fc22b84EC6F8d185D8F3dFC9a352?chain=mumbai&format=decimal`;
+  const url = `https://deep-index.moralis.io/api/v2/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B/nft/${nftTokenAddress}?chain=rinkeby&format=decimal`;
 
   fetch(url, {
    method: "GET",
@@ -47,10 +48,10 @@ const About = () => {
      style={{ borderColor: "#2d2d2d", width: "600px" }}
     >
      <h1 className=" text-gray-50 text-lg font-semibold">Network</h1>
-     <p className="font-normal text-gray-400">Polygon Testnet</p>
+     <p className="font-normal text-gray-400">Rinkeby Testnet</p>
 
      <h1 className=" text-gray-50 text-lg font-semibold mt-4">Proposal Validation</h1>
-     <p className="font-normal text-gray-400 ">basic</p>
+     <p className="font-normal text-gray-400 ">ERC 721 votes</p>
 
      <h1 className=" text-gray-50 text-lg font-semibold mt-4">Voting Strategy</h1>
      <p className="font-normal text-gray-400 ">Single chain</p>
@@ -70,7 +71,7 @@ const About = () => {
        className="flex flex-row py-2 px-4 w-full border-b border-gray-200 dark:border-gray-600"
        style={{ borderColor: "#2d2d2d" }}
       >
-       <img src={Data.result[0].token_uri} className=" h-14 w-14 rounded-full" alt="" />{" "}
+       <img src={Data.result[0].token_uri.slice(34)} className=" h-14 w-14 rounded-full" alt="" />{" "}
        <a
         href="https://mumbai.polygonscan.com/address/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B"
         className="mt-3 ml-3"

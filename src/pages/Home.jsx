@@ -4,12 +4,13 @@ import Card from "../components/Card";
 import { Sidebar } from "../components/Sidebar";
 import Heading from "../components/Heading.jsx";
 import Axios from "axios";
+import { url } from "../utils/Connectors.jsx";
 
 const Home = () => {
  const [Data, setData] = useState([]);
 
  React.useEffect(() => {
-  Axios.get("http://127.0.0.1:5000/api/")
+  Axios.get(url)
    .then((res) => {
     setData(res.data);
    })

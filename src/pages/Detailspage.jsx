@@ -4,7 +4,7 @@ import { Navbar } from "../components/Navbar";
 import Vote from "../components/Vote";
 import Sidetabs from "../components/Sidetabs";
 import { useParams } from "react-router-dom";
-import { governanceContract } from "../utils/Connectors";
+import { url } from "../utils/Connectors";
 import axios from "axios";
 
 const Detailspage = () => {
@@ -17,7 +17,7 @@ const Detailspage = () => {
 
  const loadData = async () => {
   try {
-   axios.get(`http://127.0.0.1:5000/api/views/${id}`).then((res) => setdata(res.data));
+   axios.get(`${url}views/${id}`).then((res) => setdata(res.data));
   } catch (error) {
    console.error(error.message);
   }

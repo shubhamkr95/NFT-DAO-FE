@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { governanceContract } from "../utils/Connectors";
 import { Loader } from "./Loader";
-import Axios from "axios";
 
 const Card = (prop) => {
  const [Stage, setStage] = useState([]);

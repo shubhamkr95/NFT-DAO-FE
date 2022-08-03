@@ -1,10 +1,13 @@
 import React from "react";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
-import { treasuryContract, signer, treasuryAddress, provider } from "../utils/Connectors";
+import { treasuryContract, signer, treasuryAddress, provider, url } from "../utils/Connectors";
 import ButtonLoader from "./ButtonLoader";
+import { useNavigate } from "react-router-dom";
 
-const Treasury = () => {
+const Treasury = (prop) => {
+ const { data } = prop;
+ const navigate = useNavigate();
  const [AccountBalance, setAccountBalance] = useState(0);
  const [Ether, setEther] = useState(0);
  const [TxnHash, setTxnHash] = useState("");
@@ -23,7 +26,8 @@ const Treasury = () => {
 
  useEffect(() => {
   getBalance();
- }, []);
+  console.log(data);
+ }, [data]);
 
  const handleEther = async (e) => {
   if (typeof e.target.value === String) {
@@ -48,8 +52,18 @@ const Treasury = () => {
     const txn = await signer.sendTransaction(data);
     const Txn = await txn.wait();
 
-    setTxnHash(Txn.transactionHash);
-    setLoading(false);
+    const treasuryTx = { hash: Txn.transactionHash };
+
+    fetch(`${url}treasury`, {
+     method: "POST",
+     body: JSON.stringify(treasuryTx),
+     headers: {
+      "Content-Type": "application/json",
+     },
+    })
+     .then((res) => res.text())
+     .then((data) => setTxnHash(data));
+    navigate("/");
    }
   } catch (error) {
    console.error(error.message);
@@ -59,7 +73,7 @@ const Treasury = () => {
 
  return (
   <>
-   <div className="border rounded-lg " style={{ borderColor: "#2d2d2d" }}>
+   <div className="border rounded-lg p-3" style={{ borderColor: "#2d2d2d" }}>
     <div className="mx-auto mt-5 max-w-2xl ml-4 text-2xl text-gray-50">
      <h1>Treasury</h1>
     </div>
@@ -79,7 +93,7 @@ const Treasury = () => {
     <div className="mx-auto max-w-2xl text 2xl text-gray-50 text-center">
      <form onSubmit={handleSubmit}>
       <label htmlFor="MATIC" className="text-gray-400 font-extrabold mr-1">
-       MATIC
+       ETHER
        <input
         className="bg-white border border-solid text-black text-center w-20 ml-2 rounded-lg drop-shadow-xl"
         type="number"
@@ -96,8 +110,8 @@ const Treasury = () => {
        <ButtonLoader />
       )}
      </form>
-     <a href="`https://rinkeby.etherscan.io/tx/${TxnHash}`" className="text-gray-400 font-extrabold mt-3">
-      {TxnHash}
+     <a href={`https://rinkeby.etherscan.io/tx/${TxnHash}`} className="text-gray-400 font-extrabold mt-3">
+      {TxnHash.slice(0, 20)}
      </a>
     </div>
    </div>

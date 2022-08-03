@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { governanceContract, treasuryContract, treasuryAddress } from "../utils/Connectors";
+import { governanceContract, treasuryContract, treasuryAddress, url } from "../utils/Connectors";
 import ButtonLoader from "./ButtonLoader";
 
 export const Create = () => {
@@ -53,7 +53,7 @@ export const Create = () => {
    const resultTxn = await tx.wait();
    const proposeTx = { hash: resultTxn.transactionHash };
 
-   fetch("http://127.0.0.1:5000/api/create", {
+   fetch(`${url}create`, {
     method: "POST",
     body: JSON.stringify(proposeTx),
     headers: {
@@ -72,36 +72,36 @@ export const Create = () => {
  return (
   <>
    <div
-    className="mx-auto mt-5 block p-6 m-2 max-w-2xl rounded-lg border shadow-md "
+    className="mx-auto mt-5 block p-6 m-2 max-w-2xl rounded-lg border shadow-md hover:bg-gray-100"
     style={{ borderColor: "#2d2d2d" }}
    >
-    <p className=" font-bold text-2xl text-gray-100">Create proposal.</p>
+    <p className=" font-medium  text-gray-400 ">Enter the required details in order to create a proposal</p>
    </div>
    <div>
     <form onSubmit={handleSubmit}>
-     <label className="block mt-10 mx-auto max-w-2xl text-lg font-normal text-gray-200" onChange={handleAddress}>
+     <label className="block mt-10 mx-auto max-w-2xl text-sm font-normal text-gray-400" onChange={handleAddress}>
       To
      </label>
      <input
       aria-describedby="helper-text-explanation"
       className=" border mx-auto max-w-2xl  text-gray-900 text-sm rounded-lg  block w-full p-2.5  border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
-      placeholder="receiver address"
+      placeholder="Receiver address"
       value={Address}
       onChange={handleAddress}
       required={true}
      />
-     <label className="block mt-10 mx-auto max-w-2xl text-lg font-normal text-gray-200 ">Amount</label>
+     <label className="block mt-10 mx-auto max-w-2xl text-sm font-medium text-gray-400 ">Amount</label>
      <input
       type="number"
       min="0"
-      className=" border mx-auto max-w-2xl  text-gray-900 text-sm rounded-lg  block w-full p-2.5  border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
+      className=" border mx-auto max-w-2xl  text-gray-400 text-sm rounded-lg  block w-full p-2.5  border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
       placeholder="amount in Ether"
       onChange={handleEther}
       value={Ether}
       required={true}
      />
 
-     <label htmlFor="message" className=" mt-10 block  mb-2 text-lg font-medium text-gray-200 mx-auto max-w-2xl ">
+     <label htmlFor="message" className=" mt-10 block  mb-2 text-sm font-normal text-gray-400 mx-auto max-w-2xl ">
       Description
      </label>
      <textarea
@@ -115,7 +115,9 @@ export const Create = () => {
      ></textarea>
      {!Loading ? (
       <div className="mx-auto max-w-2xl text-center">
-       <button className="bg-cyan-700 w-40 p-2 rounded-lg mt-10 ext font-bold text-white">CREATE</button>
+       <button className="bg-white w-full empty:3 px-12 py-2 rounded-full mt-10 ext font-bold text-black hover:bg-blue-600">
+        CREATE
+       </button>
       </div>
      ) : (
       <ButtonLoader />
