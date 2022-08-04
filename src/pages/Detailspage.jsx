@@ -12,12 +12,12 @@ const Detailspage = () => {
  const [data, setdata] = useState({});
 
  React.useEffect(() => {
-  loadData();
- }, []);
+  loadData(id);
+ }, [id]);
 
- const loadData = async () => {
+ const loadData = async (Id) => {
   try {
-   axios.get(`${url}views/${id}`).then((res) => setdata(res.data));
+   axios.get(`${url}views/${Id}`).then((res) => setdata(res.data));
   } catch (error) {
    console.error(error.message);
   }

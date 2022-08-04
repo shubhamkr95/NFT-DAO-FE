@@ -80,7 +80,7 @@ const Treasury = () => {
      style={{ borderColor: "#2d2d2d" }}
     >
      <div className="text-gray-500  font-medium ">
-      <p>The Total balance in the treasury is {AccountBalance} ether</p>
+      <p>The Total balance in the treasury is {AccountBalance} Ether</p>
      </div>
     </div>
 

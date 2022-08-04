@@ -31,7 +31,7 @@ https://deep-index.moralis.io/api/v2/nft/${nftTokenAddress}/owners?chain=rinkeby
 
  return (
   <div>
-   <div className="max-w-2xl  py-4 px-3 mt-8  rounded-xl border" style={{ borderColor: "#2d2d2d" }}>
+   <div className="max-w-3xl  py-4 px-3 mt-8  rounded-xl border" style={{ borderColor: "#2d2d2d" }}>
     <div className="flex flex-row justify-between">
      <div>
       <h3 className="text-gray-400">NFTS</h3>
@@ -45,12 +45,14 @@ https://deep-index.moralis.io/api/v2/nft/${nftTokenAddress}/owners?chain=rinkeby
     <div className="grid grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-4 ml-2 mr-2 mt-5 mb-5 justify-center items-center ">
      {data.map((item, index) => {
       return (
-       <img
-        src={item.token_uri}
-        className=" h-40 w-60 rounded-lg text-white"
-        key={index}
-        alt={`TokenID - ${item.token_id}`}
-       />
+       <a href={`https://rinkeby.etherscan.io/address/${item.owner_of}`}>
+        <img
+         src={item.token_uri}
+         className=" h-36 w-36 rounded-lg text-white"
+         key={index}
+         alt={`TokenID - ${item.token_id}`}
+        />
+       </a>
       );
      })}
     </div>

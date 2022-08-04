@@ -7,7 +7,7 @@ const AllNfts = () => {
 
  const fetchNft = async () => {
   const url = `
-https://deep-index.moralis.io/api/v2/nft/${nftTokenAddress}/owners?chain=rinkeby&format=decimal&limit=4`;
+https://deep-index.moralis.io/api/v2/nft/${nftTokenAddress}/owners?chain=rinkeby&format=decimal&limit=8`;
 
   axios(url, {
    method: "GET",
@@ -35,7 +35,9 @@ https://deep-index.moralis.io/api/v2/nft/${nftTokenAddress}/owners?chain=rinkeby
     {data.map((item, index) => {
      return (
       <div key={index}>
-       <img src={item.token_uri} className=" h-60 w-96 rounded-lg text-white" alt={`TokenID - ${item.token_id}`} />
+       <a href={`https://rinkeby.etherscan.io/address/${item.owner_of}`}>
+        <img src={item.token_uri} className=" h-60 w-96 rounded-lg text-white" alt={`TokenID - ${item.token_id}`} />
+       </a>
       </div>
      );
     })}

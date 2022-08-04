@@ -45,7 +45,7 @@ const Card = (prop) => {
      </div>
      <h5 className="mb-2 text-2xl font-bold tracking-tight  text-white group-hover:text-gray-400">{`${data.desc.slice(
       0,
-      20
+      32
      )}`}</h5>
      <p className="font-normal text-gray-200 mt-4">Proposal ID - {`${data.id.slice(0, 30)}...`}</p>
      <p className="font-normal text-gray-400 mt-3">{`${data.desc.slice(0, 120)}`}</p>

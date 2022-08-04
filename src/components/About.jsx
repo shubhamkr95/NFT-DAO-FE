@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
 import { nftTokenAddress } from "../utils/Connectors";
@@ -5,6 +6,7 @@ import { nftTokenAddress } from "../utils/Connectors";
 const About = () => {
  const [Data, setData] = useState("");
  const [Loading, setLoading] = useState(true);
+ const [Authors, setAuthors] = useState([]);
 
  const fetchNft = async () => {
   const url = `https://deep-index.moralis.io/api/v2/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B/nft/${nftTokenAddress}?chain=rinkeby&format=decimal`;
@@ -26,8 +28,26 @@ const About = () => {
    });
  };
 
+ const getAuthors = () => {
+  const url = `https://deep-index.moralis.io/api/v2/nft/0xCB48a311045B8ccBBEaBBee0F117d008F43fB6c9/owners?chain=rinkeby&format=decimal&limit=8
+`;
+
+  axios(url, {
+   method: "GET",
+   headers: {
+    "Content-Type": "application/json;charset=UTF-8",
+    "x-api-key": process.env.REACT_APP_API_KEY,
+   },
+  })
+   .then((res) => setAuthors(res.data.result))
+   .catch((err) => {
+    console.log(err);
+   });
+ };
+
  useEffect(() => {
   fetchNft();
+  getAuthors();
  }, []);
 
  if (Loading) {
@@ -74,7 +94,7 @@ const About = () => {
        <img src={Data.result[0].token_uri.slice(34)} className=" h-8 w-8 rounded-full" alt="" />{" "}
        <a
         href="https://rinkeby.etherscan.io/address/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B"
-        className="mt-3 ml-3 text-sm"
+        className="mt-3 ml-3 text-sm hover:text-cyan-200"
        >
         0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B
        </a>
@@ -83,36 +103,29 @@ const About = () => {
     </div>
     <div>
      <ul
-      className="mx-auto max-w-xl mt-5 mb-5 text-lg font-medium   rounded-lg border border-gray-200  border-gray-600 text-white"
+      className="mx-auto max-w-xl mt-5 mb-5 text-lg font-medium   rounded-lg border   border-gray-600 text-white"
       style={{ borderColor: "#2d2d2d" }}
      >
       <li className="py-3 px-4 w-full rounded-t-lg border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
        Authors
       </li>
-      <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
-       0x47f8...32a1
-      </li>
-      <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/042.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
-       abvavgjoe.eth
-      </li>
-      <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/043.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
-       redvan.eth
-      </li>
-      <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/044.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
-       grendel.eth
-      </li>
-      <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/045.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
-       frogmonkee.eth
-      </li>
-      <li className="flex flex-row py-3 px-4 w-full border-b border-gray-600" style={{ borderColor: "#2d2d2d" }}>
-       <img src="https://mdbootstrap.com/img/new/standard/city/046.jpg" class=" h-8 w-8 rounded-full" alt="" />{" "}
-       icedcool.eth
-      </li>
+      {Authors.map((item, index) => {
+       return (
+        <li
+         className="flex flex-row py-3 px-4 w-full border-b border-gray-600"
+         style={{ borderColor: "#2d2d2d" }}
+         key={index}
+        >
+         <img src={item.token_uri} className=" h-8 w-8 rounded-full" alt="" />
+         <a
+          href={`https://rinkeby.etherscan.io/address/${item.owner_of}`}
+          className="text-sm mt-3 ml-3 hover:text-cyan-200"
+         >
+          {item.owner_of}
+         </a>
+        </li>
+       );
+      })}
      </ul>
     </div>
    </>
