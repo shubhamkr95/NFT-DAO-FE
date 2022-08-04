@@ -10,6 +10,7 @@ import Detailspage from "./pages/Detailspage";
 import { Route, Routes } from "react-router-dom";
 import Nftpage from "./pages/Nftpage";
 import NoPageFound from "./pages/NoPageFound";
+import Delegatepage from "./pages/Delegatepage";
 
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
@@ -44,6 +45,8 @@ export default function App() {
       <Route path="/About" element={<Aboutpage />} />
       <Route path="/views/:id" element={<Detailspage />} />
       <Route path="/Nft" element={<Nftpage />} />
+      <Route path="/Delegate" element={<Delegatepage />} />
+
       <Route path="*" element={<NoPageFound />}></Route>
      </Routes>
     </div>

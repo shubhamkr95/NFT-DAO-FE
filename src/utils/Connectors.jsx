@@ -1,9 +1,11 @@
 import { ethers } from "ethers";
 import treasuryABI from "./Treasury.json";
 import governanceABI from "./Governance.json";
+import governTokenABI from "./GovernToken.json";
 
 export const treasuryAbi = treasuryABI.abi;
 export const governanceAbi = governanceABI.abi;
+export const nftAbi = governTokenABI.abi;
 
 export const treasuryAddress = "0xF9C0722047CD51e82EC59856BD86ad869FF6f4f6";
 
@@ -20,3 +22,5 @@ export const signer = provider.getSigner();
 export const treasuryContract = new ethers.Contract(treasuryAddress, treasuryABI.abi, signer);
 
 export const governanceContract = new ethers.Contract(governanceAddress, governanceABI.abi, signer);
+
+export const nftContract = new ethers.Contract(nftTokenAddress, nftAbi, signer);
