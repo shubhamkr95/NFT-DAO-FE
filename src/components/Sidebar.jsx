@@ -47,6 +47,15 @@ export const Sidebar = () => {
     </li>
     <li>
      <NavLink
+      to="/Delegate"
+      className="flex items-center ml-3 p-2 text-base font-normal rounded-lg text-white hover:bg-gray-700"
+     >
+      {" "}
+      Delegate
+     </NavLink>
+    </li>
+    <li>
+     <NavLink
       to="/About"
       className="flex items-center ml-3 p-2 text-base font-normal  rounded-lg text-white hover:bg-gray-700"
      >

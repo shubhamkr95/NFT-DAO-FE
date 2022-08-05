@@ -62,7 +62,9 @@ export const Create = () => {
    })
     .then((res) => res.text())
     .then((data) => setData(data));
-   navigate("/");
+   setTimeout(() => {
+    navigate("/");
+   }, 5000);
   } catch (error) {
    console.error(error);
    setLoading(false);
@@ -129,7 +131,7 @@ export const Create = () => {
       <ButtonLoader />
      )}
     </form>
-    <p className="text-white">{Data}</p>
+    <p className="text-white text-center">{Data}</p>
    </div>
   </>
  );
