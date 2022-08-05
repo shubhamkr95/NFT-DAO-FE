@@ -31,7 +31,9 @@ const Card = (prop) => {
      <div className="mb-3 flex flex-row justify-between">
       <div className="flex flex-row">
        <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg" className=" h-6 w-6 rounded-full" alt="" />
-       <p className=" font-medium text-gray-400 ml-2">{data.address}</p>
+       <p className=" font-medium text-gray-400 ml-2">{`${data.address.slice(0, 5)}...${data.address.slice(
+        data.address.length - 4
+       )}`}</p>
       </div>
       {Stage === 1 ? (
        <button className="bg-green-500 text-white font-bold  px-3 rounded-full">Active</button>
