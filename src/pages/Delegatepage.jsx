@@ -7,7 +7,9 @@ const Delegatepage = () => {
   <div>
    <div>
     <Navbar />
-    <Delegate />
+    <div className="mx-5 md:mx-0">
+     <Delegate />
+    </div>
    </div>
   </div>
  );

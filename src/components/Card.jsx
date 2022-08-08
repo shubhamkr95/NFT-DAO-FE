@@ -25,7 +25,7 @@ const Card = (prop) => {
    <div key={data.objId}>
     <a
      href={`/views/${data.objId}`}
-     className="block p-4 md:p-7 m-2 md:m-3 max-w-2xl  rounded-lg border shadow-md hover:bg-gray-700 h-60 md:52"
+     className="block p-4 md:p-7 m-2 mx-5 md:m-3 max-w-2xl  rounded-lg border shadow-md hover:bg-gray-700 h-60 md:52"
      style={{ borderColor: "#2d2d2d" }}
     >
      <div className="mb-3 flex flex-row justify-between">
@@ -50,7 +50,7 @@ const Card = (prop) => {
       32
      )}`}</h5>
      <p className="font-normal text-gray-200 mt-1 md:mt-4">Proposal ID - {`${data.id.slice(0, 30)}...`}</p>
-     <p className="font-normal text-sm md:text-xl text-gray-400 mt-1 md:mt-3">{`${data.desc.slice(0, 120)}`}</p>
+     <p className="font-normal text-xs md:text-xl text-gray-400 mt-1 md:mt-3">{`${data.desc.slice(0, 120)}`}</p>
     </a>
    </div>
   );
