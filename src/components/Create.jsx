@@ -32,9 +32,7 @@ export const Create = () => {
    console.log(VotesThreshold);
   };
 
-  setTimeout(() => {
-   main();
-  }, 500);
+  main();
  }, [VotesThreshold, PageLoading, VotingAddress]);
 
  const handleAddress = async (e) => {
