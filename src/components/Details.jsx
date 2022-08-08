@@ -53,7 +53,7 @@ const Details = (prop) => {
       <p className=" font-medium text-xl text-gray-200 mt-5">Quorum Required: {QuorumPercentage} Percentage</p>
       <p className=" font-medium text-xl text-gray-400 mt-5">Proposal Threshold: {ProposalThreshold} GTK</p>
       <p className=" font-medium text-xl text-gray-200 mt-5">
-       Proposal ID: <span className="font-small text-sm">{data.proposal_id}</span>
+       Proposal ID: <span className="font-small text-xl">{`${data.proposal_id.slice(0, 50)}`}</span>
       </p>
      </div>
      <div className=" mt-5  text-3xl font-bold text-gray-50">
