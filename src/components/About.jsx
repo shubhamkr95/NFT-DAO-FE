@@ -12,16 +12,15 @@ const About = () => {
  const fetchNft = async () => {
   const url = `https://deep-index.moralis.io/api/v2/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B/nft/${nftTokenAddress}?chain=rinkeby&format=decimal`;
 
-  fetch(url, {
+  axios(url, {
    method: "GET",
    headers: {
     "Content-Type": "application/json;charset=UTF-8",
     "x-api-key": process.env.REACT_APP_API_KEY,
    },
   })
-   .then((res) => res.json())
-   .then((json) => {
-    setData(json);
+   .then((res) => {
+    setData(res.data.result);
     setLoading(false);
    })
    .catch((err) => {
@@ -93,12 +92,12 @@ const About = () => {
        className="flex flex-row py-2 px-4 w-full border-b border-gray-200 dark:border-gray-600"
        style={{ borderColor: "#2d2d2d" }}
       >
-       <img src={Data.result[0].token_uri.slice(34)} className=" h-8 w-8 rounded-full" alt="" />{" "}
+       <img src={Data[0].token_uri.slice(34)} className=" h-8 w-8 rounded-full" alt="" />{" "}
        <a
         href="https://rinkeby.etherscan.io/address/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B"
         className="mt-3 ml-3 text-sm hover:text-cyan-200"
        >
-        0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B
+        {Data[0].owner_of.slice(0, 35)}
        </a>
       </li>
      </ul>

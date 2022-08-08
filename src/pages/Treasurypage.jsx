@@ -30,7 +30,7 @@ const Treasurypage = () => {
      <div className="mt-5">
       <Treasury />
      </div>
-     <div className="mt-5 text-gray-400 ">
+     <div className="mt-5 text-white ">
       <h5>Recent Activity</h5>
      </div>
      {Data.map((item, index) => {
