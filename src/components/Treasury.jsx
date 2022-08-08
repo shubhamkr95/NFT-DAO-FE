@@ -79,7 +79,7 @@ const Treasury = () => {
      className="mx-auto mt-2 block p-2 w-full m-3  max-w-2xl rounded-lg border shadow-md hover:bg-gray-400"
      style={{ borderColor: "#2d2d2d" }}
     >
-     <div className="text-gray-500  font-medium ">
+     <div className="text-gray-500 mx-5   font-medium ">
       <p>The Total balance in the treasury is {AccountBalance} Ether</p>
      </div>
     </div>
