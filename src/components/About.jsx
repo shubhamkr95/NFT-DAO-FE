@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
 import { nftTokenAddress } from "../utils/Connectors";
+import "../assets/about.css";
 
 const About = () => {
  const [Data, setData] = useState("");
@@ -64,8 +65,9 @@ const About = () => {
      <h1>About</h1>
     </div>
     <div
-     className="mx-auto mt-2 block p-6 m-2 max-w-xl  rounded-lg border shadow-md "
-     style={{ borderColor: "#2d2d2d", width: "700px" }}
+     className="mx-auto mt-2 block p-6 m-2 max-w-xl rounded-lg border shadow-md "
+     style={{ borderColor: "#2d2d2d" }}
+     id="about"
     >
      <h1 className=" text-gray-50 text-lg font-semibold">Network</h1>
      <p className="font-normal text-gray-400">Rinkeby Testnet</p>
@@ -121,7 +123,7 @@ const About = () => {
           href={`https://rinkeby.etherscan.io/address/${item.owner_of}`}
           className="text-sm mt-3 ml-3 hover:text-cyan-200"
          >
-          {item.owner_of}
+          {item.owner_of.slice(0, 35)}
          </a>
         </li>
        );

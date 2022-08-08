@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ButtonLoader from "./ButtonLoader";
 import { nftContract } from "../utils/Connectors";
+import "../assets/delegate.css";
 
 const Delegate = () => {
  const [Loading, setLoading] = useState(false);
@@ -34,10 +35,11 @@ const Delegate = () => {
 
  return (
   <div>
-   <div className="mx-auto mt-10  text-white text-3xl font-bold max-w-2xl" style={{ width: "600px" }}>
+   <div className="mx-auto mt-10  text-white text-3xl font-bold max-w-2xl" id="delegate">
     <div
      className="mx-auto mt-5 block p-6 m-2 max-w-2xl rounded-lg border shadow-md hover:bg-gray-100"
-     style={{ borderColor: "#2d2d2d", width: "600px" }}
+     style={{ borderColor: "#2d2d2d" }}
+     id="delegate"
     >
      <p className="font-normal text-lg text-center text-gray-400">Add the address you want to delegate.</p>
     </div>

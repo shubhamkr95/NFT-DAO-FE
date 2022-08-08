@@ -9,8 +9,7 @@ const Nft = () => {
 
  const fetchNft = async () => {
   const url = `
-https://deep-index.moralis.io/api/v2/nft/${nftTokenAddress}/owners?chain=rinkeby&format=decimal&limit=4
-`;
+https://deep-index.moralis.io/api/v2/nft/${nftTokenAddress}?chain=rinkeby&format=decimal`;
 
   axios(url, {
    method: "GET",
