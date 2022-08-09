@@ -10,6 +10,18 @@ const Home = () => {
  const [Data, setData] = useState([]);
 
  React.useEffect(() => {
+  if (window.ethereum) {
+   window.ethereum.on("accountsChanged", () => {
+    window.location.reload();
+   });
+  }
+
+  if (window.ethereum) {
+   window.ethereum.on("chainChanged", () => {
+    window.location.reload();
+   });
+  }
+
   Axios.get(url)
    .then((res) => {
     setData(res.data);

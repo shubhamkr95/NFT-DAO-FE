@@ -51,7 +51,7 @@ const Sidetabs = (props) => {
 
    const queueTx = await Tx.wait();
    console.log(queueTx);
-   navigate("/");
+   window.location.reload();
   } catch (error) {
    console.error(error);
    setLoading(false);
