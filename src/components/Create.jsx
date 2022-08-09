@@ -1,39 +1,17 @@
 import { ethers } from "ethers";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { governanceContract, treasuryContract, treasuryAddress, url, provider, nftContract } from "../utils/Connectors";
+import { governanceContract, treasuryContract, treasuryAddress, url } from "../utils/Connectors";
 import ButtonLoader from "./ButtonLoader";
-import { Loader } from "./Loader";
 
-export const Create = () => {
+export const Create = (prop) => {
  const navigate = useNavigate();
  const [Address, setAddress] = useState("");
  const [Ether, setEther] = useState(0);
  const [Description, setDescription] = useState("");
  const [Data, setData] = useState("");
  const [Loading, setLoading] = useState(false);
- const [VotingAddress, setVotingAddress] = useState([]);
- const [VotesThreshold, setVotesThreshold] = useState("");
- const [PageLoading, setPageLoading] = useState(true);
-
- useEffect(() => {
-  const main = async () => {
-   const addresses = await provider.listAccounts();
-   setVotingAddress(addresses[0]);
-
-   const getVotes = await nftContract.getVotes(VotingAddress);
-   setVotesThreshold(getVotes.toString());
-   if (Number(VotesThreshold) === 1) {
-    setPageLoading(false);
-   } else if (Number(VotesThreshold) !== 1) {
-    setPageLoading(true);
-    alert("You need NFT to create a proposal");
-   }
-   console.log(VotesThreshold);
-  };
-
-  main();
- }, [VotesThreshold, PageLoading, VotingAddress]);
+ const { data } = prop;
 
  const handleAddress = async (e) => {
   try {
@@ -94,72 +72,79 @@ export const Create = () => {
   }
  };
 
- if (PageLoading) {
-  return <Loader />;
- } else {
-  return (
-   <>
+ return (
+  <>
+   {data <= 0 ? (
+    <div
+     className="mx-auto mt-5 block p-6 m-2 max-w-2xl rounded-lg border shadow-md hover:bg-gray-100"
+     style={{ borderColor: "#2d2d2d" }}
+    >
+     <p className=" font-medium  text-red-400 ">You need NFT to create a proposal</p>
+    </div>
+   ) : (
     <div
      className="mx-auto mt-5 block p-6 m-2 max-w-2xl rounded-lg border shadow-md hover:bg-gray-100"
      style={{ borderColor: "#2d2d2d" }}
     >
      <p className=" font-medium  text-gray-400 ">Enter the required details in order to create a proposal</p>
     </div>
-    <div>
-     <form onSubmit={handleSubmit}>
-      <label className="block mt-10 mb-2 mx-auto max-w-2xl text-sm font-normal text-gray-400" onChange={handleAddress}>
-       To
-      </label>
-      <input
-       aria-describedby="helper-text-explanation"
-       className=" border mx-auto max-w-2xl  text-white text-sm rounded-lg  block w-full p-2.5 bg-transparent border-gray-600  focus:ring-blue-500 focus:border-blue-500"
-       placeholder="Receiver address"
-       style={{ borderColor: "#2d2d2d" }}
-       value={Address}
-       onChange={handleAddress}
-       required={true}
-      />
-      <label className="block mb-2 mt-10 mx-auto max-w-2xl text-sm font-medium text-gray-400 ">Amount</label>
-      <input
-       type="number"
-       min="0"
-       className=" border mx-auto max-w-2xl  text-white text-sm rounded-lg  block w-full p-2.5  border-gray-600 bg-transparent  focus:ring-blue-500 focus:border-blue-500"
-       placeholder="amount in Ether"
-       style={{ borderColor: "#2d2d2d" }}
-       onChange={handleEther}
-       value={Ether}
-       required={true}
-      />
+   )}
 
-      <label htmlFor="message" className=" mb-2 mt-10 block   text-sm font-normal text-gray-400 mx-auto max-w-2xl ">
-       Description
-      </label>
-      <textarea
-       id="message"
-       rows="6"
-       className="block p-2.5 w-full mx-auto max-w-2xl text-sm rounded-lg border bg-transparent focus:ring-blue-500 focus:border-blue-500 border-gray-600  text-white "
-       placeholder="Write the description for the proposal"
-       value={Description}
-       style={{ borderColor: "#2d2d2d" }}
-       onChange={handleDescription}
-       required={true}
-      ></textarea>
-      {!Loading ? (
-       <div className="mx-auto max-w-2xl text-center">
-        <button
-         className="bg-transparent border w-full empty:3 px-12 py-4 rounded-full mt-10 ext font-normal text-white hover:bg-blue-600"
-         style={{ borderColor: "#2d2d2d" }}
-        >
-         Create
-        </button>
-       </div>
-      ) : (
-       <ButtonLoader />
-      )}
-     </form>
-     <p className="text-white text-center">{Data}</p>
-    </div>
-   </>
-  );
- }
+   <div>
+    <form onSubmit={handleSubmit}>
+     <label className="block mt-10 mb-2 mx-auto max-w-2xl text-sm font-normal text-gray-400" onChange={handleAddress}>
+      To
+     </label>
+     <input
+      aria-describedby="helper-text-explanation"
+      className=" border mx-auto max-w-2xl  text-white text-sm rounded-lg  block w-full p-2.5 bg-transparent border-gray-600  focus:ring-blue-500 focus:border-blue-500"
+      placeholder="Receiver address"
+      style={{ borderColor: "#2d2d2d" }}
+      value={Address}
+      onChange={handleAddress}
+      required={true}
+     />
+     <label className="block mb-2 mt-10 mx-auto max-w-2xl text-sm font-medium text-gray-400 ">Amount</label>
+     <input
+      type="number"
+      min="0"
+      className=" border mx-auto max-w-2xl  text-white text-sm rounded-lg  block w-full p-2.5  border-gray-600 bg-transparent  focus:ring-blue-500 focus:border-blue-500"
+      placeholder="amount in Ether"
+      style={{ borderColor: "#2d2d2d" }}
+      onChange={handleEther}
+      value={Ether}
+      required={true}
+     />
+
+     <label htmlFor="message" className=" mb-2 mt-10 block   text-sm font-normal text-gray-400 mx-auto max-w-2xl ">
+      Description
+     </label>
+     <textarea
+      id="message"
+      rows="6"
+      className="block p-2.5 w-full mx-auto max-w-2xl text-sm rounded-lg border bg-transparent focus:ring-blue-500 focus:border-blue-500 border-gray-600  text-white "
+      placeholder="Write the description for the proposal"
+      value={Description}
+      style={{ borderColor: "#2d2d2d" }}
+      onChange={handleDescription}
+      required={true}
+     ></textarea>
+     {!Loading ? (
+      <div className="mx-auto max-w-2xl text-center">
+       <button
+        className="bg-transparent border w-full empty:3 px-12 py-4 rounded-full mt-10 ext font-normal text-white hover:bg-blue-600"
+        style={{ borderColor: "#2d2d2d" }}
+        disabled={data <= 0 ? true : false}
+       >
+        {data <= 0 ? "Require 1 Nft threshold" : "Submit"}
+       </button>
+      </div>
+     ) : (
+      <ButtonLoader />
+     )}
+    </form>
+    <p className="text-white text-center">{Data}</p>
+   </div>
+  </>
+ );
 };
