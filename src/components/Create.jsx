@@ -65,7 +65,7 @@ export const Create = (prop) => {
     .then((data) => setData(data));
    setTimeout(() => {
     navigate("/");
-   }, 5000);
+   }, 10000);
   } catch (error) {
    console.error(error);
    setLoading(false);
