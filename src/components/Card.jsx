@@ -1,11 +1,13 @@
+import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
-import { governanceContract } from "../utils/Connectors";
+import { governanceContract, nftTokenAddress } from "../utils/Connectors";
 import { Loader } from "./Loader";
 
 const Card = (prop) => {
  const [Stage, setStage] = useState([]);
  const [Loading, setLoading] = useState(true);
+ const [Uri, setUri] = useState([]);
  const { data } = prop;
 
  useEffect(() => {
@@ -13,6 +15,22 @@ const Card = (prop) => {
    const ids = await governanceContract.state(propId.id.toString());
    setStage(ids);
    setLoading(false);
+
+   const url = `https://deep-index.moralis.io/api/v2/${data.address}/nft/${nftTokenAddress}?chain=rinkeby&format=decimal`;
+
+   axios(url, {
+    method: "GET",
+    headers: {
+     "Content-Type": "application/json;charset=UTF-8",
+     "x-api-key": process.env.REACT_APP_API_KEY,
+    },
+   })
+    .then((res) => {
+     setUri(res.data.result[0].token_uri);
+    })
+    .catch((err) => {
+     console.log(err);
+    });
   }
 
   main(data);
@@ -30,7 +48,7 @@ const Card = (prop) => {
     >
      <div className="mb-3 flex flex-row justify-between">
       <div className="flex flex-row">
-       <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg" className=" h-6 w-6 rounded-full" alt="" />
+       <img src={Uri} className=" h-6 w-6 rounded-full" alt="" />
        <p className=" font-medium text-gray-400 ml-2">{`${data.address.slice(0, 5)}...${data.address.slice(
         data.address.length - 4
        )}`}</p>
