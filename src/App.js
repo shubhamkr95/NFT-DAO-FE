@@ -47,6 +47,7 @@ export default function App() {
        <Route path="Nft" element={<Nftpage />} />
        <Route path="Delegate" element={<Delegatepage />} />
 
+       {/* chages */}
        <Route path="*" element={<NoPageFound />}></Route>
       </Routes>
      </div>
